@@ -22,12 +22,37 @@ namespace LCApp {
             try
             {
                 clientSocket.Connect(new IPEndPoint(ip, 8081));
-                clientSocket.Close();
+                //clientSocket.Close();
+                Thread t1 = new Thread(new ParameterizedThreadStart(TestMethod));
+                t1.IsBackground = true;
+                t1.Start(clientSocket);
                 Application.Run(new Form1());
             }
             catch
             {
                 Application.Run(new Warning1());
+            }
+        }
+
+        private static void TestMethod(object obj) {
+            Socket datastr = obj as Socket;
+            //通过 clientSocket 发送数据  
+            while (true)
+            {
+                try
+                {
+                    Thread.Sleep(1000);    //等待1秒钟  
+                    string sendMessage = "Heartbeat Message：" + DateTime.Now;
+                    byte[] byteArray = System.Text.Encoding.Default.GetBytes(sendMessage);
+                    datastr.Send(byteArray);
+                }
+                catch
+                {
+                    datastr.Shutdown(SocketShutdown.Both);
+                    datastr.Close();
+                    Application.Restart();
+                    break;
+                }
             }
         }
     }

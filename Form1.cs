@@ -236,5 +236,9 @@ namespace LCApp {
             picture(true);
             this.button16.Enabled = false;
         }
+
+        private void button18_Click(object sender, EventArgs e) {
+            System.Environment.Exit(0);
+        }
     }
 }
