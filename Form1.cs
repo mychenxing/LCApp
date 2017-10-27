@@ -13,10 +13,16 @@ namespace LCApp {
         public Form1() {
             InitializeComponent();
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(569, 487);
+            this.ClientSize = new System.Drawing.Size(this.panel1.Width,this.panel1.Height);//主界面显示内容的宽高
 
             Interface();    //界面初始化显示方法
             BtnAry();       // 四大市场子按钮组——隐藏
+
+            string str2 = System.AppDomain.CurrentDomain.BaseDirectory;
+            Console.WriteLine(str2);
+        }
+
+        private void ReadXmlData() {
 
         }
 
@@ -29,6 +35,7 @@ namespace LCApp {
 
             GridView(false);
             picture(false);
+            Add_Exit_Btn(false);
 
             this.groupBox1.Text = this.button1.Text;
             this.groupBox2.Text = this.button2.Text;
@@ -107,56 +114,70 @@ namespace LCApp {
             this.pictureBox1.Visible = B;
         }
 
+        /// <summary>
+        /// 添加人员与退出程序 按钮，显示与隐藏
+        /// </summary>
+        /// <param name="B"></param>
+        void Add_Exit_Btn(Boolean B) {
+            this.button17.Visible = B;
+            this.button18.Visible = B;
+            this.button23.Visible = B;
+            this.button23.Enabled = false;
+        }
+
+        //市场一
         private void button1_Click(object sender, EventArgs e) {
-            BtnAry();       //四大市场子按钮组——隐藏
-            BtnArySC();     //四大市场按钮——启用
-            ChildBtnAry();  // 四大市场子按钮组——启用选项
-            GridView(false);// 表格 隐藏
-            picture(false); //主界面缩略图 隐藏
+            BtnAry();           //四大市场子按钮组——隐藏
+            BtnArySC();         //四大市场按钮——启用
+            ChildBtnAry();      // 四大市场子按钮组——启用选项
+            GridView(false);    // 表格 隐藏
+            picture(false);     //主界面缩略图 隐藏
+            Add_Exit_Btn(false);//添加人员与退出程序 按钮,隐藏
             this.groupBox1.Visible = true;
             this.button1.Enabled = false;
         }
 
+        //市场二
         private void button2_Click(object sender, EventArgs e) {
             BtnAry();
             BtnArySC();
             ChildBtnAry();
-            
-            this.groupBox2.Visible = true;
-            this.button2.Enabled = false;
-
             GridView(false);
             picture(false);
+            Add_Exit_Btn(false);
+            this.groupBox2.Visible = true;
+            this.button2.Enabled = false;           
         }
 
+        //市场三
         private void button3_Click(object sender, EventArgs e) {
             BtnAry();
             BtnArySC();
             ChildBtnAry();
-
-            this.groupBox3.Visible = true;
-            this.button3.Enabled = false;
-
             GridView(false);
             picture(false);
+            Add_Exit_Btn(false);
+            this.groupBox3.Visible = true;
+            this.button3.Enabled = false; 
         }
 
+        //市场四
         private void button4_Click(object sender, EventArgs e) {
             BtnAry();
             BtnArySC();
             ChildBtnAry();
-
-            this.groupBox4.Visible = true;
-            this.button4.Enabled = false;
-
             GridView(false);
             picture(false);
+            Add_Exit_Btn(false);
+            this.groupBox4.Visible = true;
+            this.button4.Enabled = false;
         }
 
         private void button5_Click(object sender, EventArgs e) {
             ChildBtnAry();  // 四大市场子按钮组——启用选项
             GridView(true);// 表格 隐藏
             picture(true);
+            Add_Exit_Btn(true);
             button5.Enabled = false;
         }
 
@@ -164,6 +185,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             button6.Enabled = false;
         }
 
@@ -171,6 +193,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             button7.Enabled = false;
         }
 
@@ -178,6 +201,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             this.button8.Enabled = false;
         }
 
@@ -185,6 +209,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             this.button9.Enabled = false;
         }
 
@@ -192,6 +217,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             this.button10.Enabled = false;
         }
 
@@ -199,6 +225,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             this.button11.Enabled = false;
         }
 
@@ -206,6 +233,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             this.button12.Enabled = false;
         }
 
@@ -213,6 +241,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             this.button13.Enabled = false;
         }
 
@@ -220,6 +249,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             this.button14.Enabled = false;
         }
 
@@ -227,6 +257,7 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             this.button15.Enabled = false;
         }
 
@@ -234,11 +265,52 @@ namespace LCApp {
             ChildBtnAry();
             GridView(true);
             picture(true);
+            Add_Exit_Btn(true);
             this.button16.Enabled = false;
         }
 
         private void button18_Click(object sender, EventArgs e) {
             System.Environment.Exit(0);
+        }
+
+        private void textBox1_Click(object sender, EventArgs e) {
+            this.openFileDialog1.Multiselect = false;
+            this.openFileDialog1.InitialDirectory = ".";
+            this.openFileDialog1.Title = "请选择缩略图文件";
+            this.openFileDialog1.Filter = "缩略图文件(*.jpg,*.png)|*.jpg;*.png";
+            this.openFileDialog1.ShowDialog();
+            if(openFileDialog1.FileName != string.Empty)
+            {
+                try
+                {
+                    string file = this.openFileDialog1.FileName;
+                    this.textBox1.Text = file;
+                    this.pictureBox2.Image = Image.FromFile(file);
+                }
+                catch
+                {
+                    this.textBox1.Text = "选择缩略图";
+                    MessageBox.Show("错误");
+                }
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e) {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e) {
+
+        }
+
+        //主界面，添加人员按钮
+        private void button17_Click(object sender, EventArgs e) {
+            this.panel1.Visible = false;
+        }
+
+        //添加人员面板，取消按钮
+        private void button22_Click(object sender, EventArgs e) {
+            this.panel1.Visible = true;
         }
     }
 }
