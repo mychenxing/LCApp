@@ -21,7 +21,7 @@ namespace LCApp {
 
             string str2 = System.AppDomain.CurrentDomain.BaseDirectory;
             Console.WriteLine("地址："+str2);
-            ReadXmlData(@"C:\Users\Max-PC\Source\Repos\LCApp\Data.xml");
+            ReadXmlData(@"C:\Users\myche\Source\Repos\LCApp\Data.xml");
         }
 
         private void ReadXmlData(string str) {
@@ -35,41 +35,16 @@ namespace LCApp {
                     if (reader.Name=="name1")
                     {
                         this.listBox2.Items.Add(reader.GetAttribute(0));
-                        this.listBox2.Items.Add(reader.GetAttribute(1));
-                        this.listBox2.Items.Add(reader.GetAttribute(2));
-                        this.listBox2.Items.Add(reader.GetAttribute(3));
-                        this.listBox2.Items.Add(reader.GetAttribute(4));
-                        this.listBox2.Items.Add(reader.GetAttribute(5));
-                        this.listBox2.Items.Add(reader.GetAttribute(6));
-                        this.listBox2.Items.Add(reader.GetAttribute(7));
-                        this.listBox2.Items.Add(reader.GetAttribute(8));
-                        /*
-                        xmlModel.ImgSrc90 = reader.GetAttribute(0);
-                        xmlModel.ImgSrc80 = reader.GetAttribute(1);
-                        xmlModel.ImgSrc70 = reader.GetAttribute(2);
-                        xmlModel.ImgInfoSrc90 = reader.GetAttribute(3);
-                        xmlModel.ImgInfoSrc80 = reader.GetAttribute(4);
-                        xmlModel.ImgInfoSrc70 = reader.GetAttribute(5);
-                        xmlModel.ImgPhotoSrc90 = reader.GetAttribute(6);
-                        xmlModel.ImgPhotoSrc80 = reader.GetAttribute(7);
-                        xmlModel.ImgPhotoSrc70 = reader.GetAttribute(8);
-                        
-                        this.listBox2.Items.Add(xmlModel.ImgSrc90);
-                        this.listBox2.Items.Add(xmlModel.ImgSrc80);
-                        this.listBox2.Items.Add(xmlModel.ImgSrc70);
-                        this.listBox2.Items.Add(xmlModel.ImgInfoSrc90);
-                        this.listBox2.Items.Add(xmlModel.ImgInfoSrc80);
-                        this.listBox2.Items.Add(xmlModel.ImgInfoSrc70);
-                        this.listBox2.Items.Add(xmlModel.ImgPhotoSrc90);
-                        this.listBox2.Items.Add(xmlModel.ImgPhotoSrc80);
-                        this.listBox2.Items.Add(xmlModel.ImgPhotoSrc70);*/
                     }
                 }
-
                 if (reader.NodeType==XmlNodeType.EndElement)
                 {
                     xmlModelList.Add(xmlModel);
                 }
+            }
+            for (int i = 0; i < this.listBox2.Items.Count; i++)
+            {
+                Console.WriteLine((this.listBox2.Items[i].ToString()));
             }
         }
         
