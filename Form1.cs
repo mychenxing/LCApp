@@ -24,6 +24,33 @@ namespace LCApp {
             ReadXmlData(@"C:\Users\myche\Source\Repos\LCApp\Data.xml");
         }
 
+        /// <summary>
+        /// 定义存储文件夹地址的泛型数组,P~视频；A~市场一；B~市场二；C~市场三；D~市场四
+        /// </summary>
+        private List<string>Str_TMP = new List<string>();
+        public List<string> P_List = new List<string>();
+        
+        public List<string> A_List1 = new List<string>();
+        public List<string> A_List2 = new List<string>();
+        public List<string> A_List3 = new List<string>();
+        public List<string> A_List4 = new List<string>();
+
+        public List<string> B_List1 = new List<string>();
+        public List<string> B_List2 = new List<string>();
+        public List<string> B_List3 = new List<string>();
+        public List<string> B_List4 = new List<string>();
+
+        public List<string> C_List1 = new List<string>();
+        public List<string> C_List2 = new List<string>();
+        public List<string> C_List3 = new List<string>();
+        public List<string> C_List4 = new List<string>();
+
+        public List<string> D_List1 = new List<string>();
+        public List<string> D_List2 = new List<string>();
+        public List<string> D_List3 = new List<string>();
+        public List<string> D_List4 = new List<string>();
+
+
         private void ReadXmlData(string str) {
             XmlTextReader reader = new XmlTextReader(str);
             List<XmlModel> xmlModelList = new List<XmlModel>();
@@ -32,19 +59,36 @@ namespace LCApp {
             {
                 if (reader.NodeType==XmlNodeType.Element)
                 {
+                    if (reader.Name=="name")
+                    {
+                        Str_TMP.Add(reader.GetAttribute(0));
+                    }
                     if (reader.Name=="name1")
                     {
-                        this.listBox2.Items.Add(reader.GetAttribute(0));
+                        Str_TMP.Add(reader.GetAttribute(0));
+                    }
+                    if (reader.Name=="name2")
+                    {
+                        Str_TMP.Add(reader.GetAttribute(0));
+                    }
+                    if (reader.Name=="name3")
+                    {
+                        Str_TMP.Add(reader.GetAttribute(0));
+                    }
+                    if (reader.Name=="name4")
+                    {
+                        Str_TMP.Add(reader.GetAttribute(0));
                     }
                 }
                 if (reader.NodeType==XmlNodeType.EndElement)
                 {
-                    xmlModelList.Add(xmlModel);
+                    xmlModelList.Add(xmlModel);Console.WriteLine("*************");
                 }
             }
-            for (int i = 0; i < this.listBox2.Items.Count; i++)
+            for (int i = 0; i < Str_TMP.Count; i++)
             {
-                Console.WriteLine((this.listBox2.Items[i].ToString()));
+                this.listBox2.Items.Add(Str_TMP[i]);
+                Console.WriteLine(Str_TMP[i]);
             }
         }
         

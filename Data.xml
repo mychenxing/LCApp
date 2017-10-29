@@ -1,56 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Data_info>
-	<name MP4 = "F:/MyFile/Data/待机视频/左屏待机.mp4">待机视频</name>
-	<name MP4 = "F:/MyFile/Data/待机视频/右屏待机.mp4">待机视频</name>
+	<name MP4 = "F:\MyFile\Data\待机视频\左屏待机.mp4">待机视频</name>
+	<name MP4 = "F:\MyFile\Data\待机视频\右屏待机.mp4">待机视频</name>
 	
-	<name1 DIR = "F://MyFile//Data//Array_1//IMG_1//">类别一:IMG_1</name1>
-	<name1 DIR = "F://MyFile//Data//Array_1//IMG_2//">类别一:IMG_2</name1>
-	<name1 DIR = "F://MyFile//Data//Array_1//IMG_3//">类别一:IMG_3</name1>
+	<name1 DIR = "F:\MyFile\Data\Array_1\IMG_1\">类别一:IMG_1</name1>
+	<name1 DIR = "F:\MyFile\Data\Array_1\IMG_2\">类别一:IMG_2</name1>
+	<name1 DIR = "F:\MyFile\Data\Array_1\IMG_3\">类别一:IMG_3</name1>
 	
-	<name1 DIR = "F://MyFile//Data//Array_1//IMG_1_INFO//">类别一:IMG_1_INFO</name1>
-	<name1 DIR = "F://MyFile//Data//Array_1//IMG_2_INFO//">类别一:IMG_2_INFO</name1>
-	<name1 DIR = "F://MyFile//Data//Array_1//IMG_3_INFO//">类别一:IMG_3_INFO</name1>
+	<name1 DIR = "F:\MyFile\Data\Array_1\IMG_1_INFO\">类别一:IMG_1_INFO</name1>
+	<name1 DIR = "F:\MyFile\Data\Array_1\IMG_2_INFO\">类别一:IMG_2_INFO</name1>
+	<name1 DIR = "F:\MyFile\Data\Array_1\IMG_3_INFO\">类别一:IMG_3_INFO</name1>
 	
-	<name1 DIR = "F://MyFile//Data//Array_1//Photo1//">类别一:Photo1</name1>
-	<name1 DIR = "F://MyFile//Data//Array_1//Photo2//">类别一:Photo2</name1>
-	<name1 DIR = "F://MyFile//Data//Array_1//Photo3//">类别一:Photo3</name1>
-	
-  
-	<name2 DIR = "F://MyFile//Data//Array_2//IMG_1//">类别二:IMG_1</name2>
-	<name2 DIR = "F://MyFile//Data//Array_2//IMG_2//">类别二:IMG_2</name2>
-	<name2 DIR = "F://MyFile//Data//Array_2//IMG_3//">类别二:IMG_3</name2>
-	
-	<name2 DIR = "F://MyFile//Data//Array_2//IMG_1_INFO//">类别二:IMG_1_INFO</name2>
-	<name2 DIR = "F://MyFile//Data//Array_2//IMG_2_INFO//">类别二:IMG_2_INFO</name2>
-	<name2 DIR = "F://MyFile//Data//Array_2//IMG_3_INFO//">类别二:IMG_3_INFO</name2>
-	
-	<name2 DIR = "F://MyFile//Data//Array_2//Photo1//">类别一:Photo1</name2>
-	<name2 DIR = "F://MyFile//Data//Array_2//Photo2//">类别一:Photo2</name2>
-	<name2 DIR = "F://MyFile//Data//Array_2//Photo3//">类别一:Photo3</name2>
+	<name1 DIR = "F:\MyFile\Data\Array_1\Photo1\">类别一:Photo1</name1>
+	<name1 DIR = "F:\MyFile\Data\Array_1\Photo2\">类别一:Photo2</name1>
+	<name1 DIR = "F:\MyFile\Data\Array_1\Photo3\">类别一:Photo3</name1>
 	
   
-	<name3 DIR = "F://MyFile//Data//Array_3//IMG_1//">类别三:IMG_1</name3>
-	<name3 DIR = "F://MyFile//Data//Array_3//IMG_2//">类别三:IMG_2</name3>
-	<name3 DIR = "F://MyFile//Data//Array_3//IMG_3//">类别三:IMG_3</name3>
+	<name2 DIR = "F:\MyFile\Data\Array_2\IMG_1\">类别二:IMG_1</name2>
+	<name2 DIR = "F:\MyFile\Data\Array_2\IMG_2\">类别二:IMG_2</name2>
+	<name2 DIR = "F:\MyFile\Data\Array_2\IMG_3\">类别二:IMG_3</name2>
 	
-	<name3 DIR = "F://MyFile//Data//Array_3//IMG_1_INFO//">类别三:IMG_1_INFO</name3>
-	<name3 DIR = "F://MyFile//Data//Array_3//IMG_2_INFO//">类别三:IMG_2_INFO</name3>
-	<name3 DIR = "F://MyFile//Data//Array_3//IMG_3_INFO//">类别三:IMG_3_INFO</name3>
+	<name2 DIR = "F:\MyFile\Data\Array_2\IMG_1_INFO\">类别二:IMG_1_INFO</name2>
+	<name2 DIR = "F:\MyFile\Data\Array_2\IMG_2_INFO\">类别二:IMG_2_INFO</name2>
+	<name2 DIR = "F:\MyFile\Data\Array_2\IMG_3_INFO\">类别二:IMG_3_INFO</name2>
 	
-	<name3 DIR = "F://MyFile//Data//Array_3//Photo1//">类别一:Photo1</name3>
-	<name3 DIR = "F://MyFile//Data//Array_3//Photo2//">类别一:Photo2</name3>
-	<name3 DIR = "F://MyFile//Data//Array_3//Photo3//">类别一:Photo3</name3>
+	<name2 DIR = "F:\MyFile\Data\Array_2\Photo1\">类别一:Photo1</name2>
+	<name2 DIR = "F:\MyFile\Data\Array_2\Photo2\">类别一:Photo2</name2>
+	<name2 DIR = "F:\MyFile\Data\Array_2\Photo3\">类别一:Photo3</name2>
 	
   
-	<name4 DIR = "F://MyFile//Data//Array_4//IMG_1//">类别四:IMG_1</name4>
-	<name4 DIR = "F://MyFile//Data//Array_4//IMG_2//">类别四:IMG_2</name4>
-	<name4 DIR = "F://MyFile//Data//Array_4//IMG_3//">类别四:IMG_3</name4>
+	<name3 DIR = "F:\MyFile\Data\Array_3\IMG_1\">类别三:IMG_1</name3>
+	<name3 DIR = "F:\MyFile\Data\Array_3\IMG_2\">类别三:IMG_2</name3>
+	<name3 DIR = "F:\MyFile\Data\Array_3\IMG_3\">类别三:IMG_3</name3>
 	
-	<name4 DIR = "F://MyFile//Data//Array_4//IMG_1_INFO//">类别四:IMG_1_INFO</name4>
-	<name4 DIR = "F://MyFile//Data//Array_4//IMG_2_INFO//">类别四:IMG_2_INFO</name4>
-	<name4 DIR = "F://MyFile//Data//Array_4//IMG_3_INFO//">类别四:IMG_3_INFO</name4>	
+	<name3 DIR = "F:\MyFile\Data\Array_3\IMG_1_INFO\">类别三:IMG_1_INFO</name3>
+	<name3 DIR = "F:\MyFile\Data\Array_3\IMG_2_INFO\">类别三:IMG_2_INFO</name3>
+	<name3 DIR = "F:\MyFile\Data\Array_3\IMG_3_INFO\">类别三:IMG_3_INFO</name3>
 	
-	<name4 DIR = "F://MyFile//Data//Array_4//Photo1//">类别一:Photo1</name4>
-	<name4 DIR = "F://MyFile//Data//Array_4//Photo2//">类别一:Photo2</name4>
-	<name4 DIR = "F://MyFile//Data//Array_4//Photo3//">类别一:Photo3</name4>
+	<name3 DIR = "F:\MyFile\Data\Array_3\Photo1\">类别一:Photo1</name3>
+	<name3 DIR = "F:\MyFile\Data\Array_3\Photo2\">类别一:Photo2</name3>
+	<name3 DIR = "F:\MyFile\Data\Array_3\Photo3\">类别一:Photo3</name3>
+	
+  
+	<name4 DIR = "F:\MyFile\Data\Array_4\IMG_1\">类别四:IMG_1</name4>
+	<name4 DIR = "F:\MyFile\Data\Array_4\IMG_2\">类别四:IMG_2</name4>
+	<name4 DIR = "F:\MyFile\Data\Array_4\IMG_3\">类别四:IMG_3</name4>
+	
+	<name4 DIR = "F:\MyFile\Data\Array_4\IMG_1_INFO\">类别四:IMG_1_INFO</name4>
+	<name4 DIR = "F:\MyFile\Data\Array_4\IMG_2_INFO\">类别四:IMG_2_INFO</name4>
+	<name4 DIR = "F:\MyFile\Data\Array_4\IMG_3_INFO\">类别四:IMG_3_INFO</name4>	
+	
+	<name4 DIR = "F:\MyFile\Data\Array_4\Photo1\">类别一:Photo1</name4>
+	<name4 DIR = "F:\MyFile\Data\Array_4\Photo2\">类别一:Photo2</name4>
+	<name4 DIR = "F:\MyFile\Data\Array_4\Photo3\">类别一:Photo3</name4>
 </Data_info>
