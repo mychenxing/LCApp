@@ -21,7 +21,7 @@ namespace LCApp {
 
             string str2 = System.AppDomain.CurrentDomain.BaseDirectory;
             Console.WriteLine("地址："+str2);
-            ReadXmlData(@"C:\Users\myche\Source\Repos\LCApp\Data.xml");
+            ReadXmlData(@"C:\Users\Max-PC\Source\Repos\LCApp\Data.xml");
         }
 
         /// <summary>
@@ -53,8 +53,6 @@ namespace LCApp {
 
         private void ReadXmlData(string str) {
             XmlTextReader reader = new XmlTextReader(str);
-            List<XmlModel> xmlModelList = new List<XmlModel>();
-            XmlModel xmlModel = new XmlModel();
             while (reader.Read())
             {
                 if (reader.NodeType==XmlNodeType.Element)
@@ -82,7 +80,6 @@ namespace LCApp {
                 }
                 if (reader.NodeType==XmlNodeType.EndElement)
                 {
-                    xmlModelList.Add(xmlModel);Console.WriteLine("*************");
                 }
             }
             for (int i = 0; i < Str_TMP.Count; i++)
