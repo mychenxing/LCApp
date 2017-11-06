@@ -24,8 +24,8 @@
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -76,6 +76,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button21 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -343,28 +344,28 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3,
             this.Column4});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.Location = new System.Drawing.Point(10, 92);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -499,9 +500,9 @@
             this.flowLayoutPanel1.Controls.Add(this.listBox1);
             this.flowLayoutPanel1.Controls.Add(this.button19);
             this.flowLayoutPanel1.Controls.Add(this.button20);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(71, 59);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 60);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(266, 344);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(360, 344);
             this.flowLayoutPanel1.TabIndex = 13;
             // 
             // label1
@@ -519,7 +520,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(62, 3);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(197, 21);
+            this.textBox3.Size = new System.Drawing.Size(279, 21);
             this.textBox3.TabIndex = 25;
             this.textBox3.TabStop = false;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -546,7 +547,7 @@
             this.domainUpDown1.Location = new System.Drawing.Point(62, 33);
             this.domainUpDown1.Name = "domainUpDown1";
             this.domainUpDown1.ReadOnly = true;
-            this.domainUpDown1.Size = new System.Drawing.Size(197, 21);
+            this.domainUpDown1.Size = new System.Drawing.Size(279, 21);
             this.domainUpDown1.TabIndex = 15;
             this.domainUpDown1.TabStop = false;
             this.domainUpDown1.Text = "市场分类";
@@ -572,7 +573,7 @@
             this.domainUpDown2.Location = new System.Drawing.Point(62, 61);
             this.domainUpDown2.Name = "domainUpDown2";
             this.domainUpDown2.ReadOnly = true;
-            this.domainUpDown2.Size = new System.Drawing.Size(197, 21);
+            this.domainUpDown2.Size = new System.Drawing.Size(279, 21);
             this.domainUpDown2.TabIndex = 16;
             this.domainUpDown2.TabStop = false;
             this.domainUpDown2.Text = "级别";
@@ -595,7 +596,7 @@
             this.textBox1.Location = new System.Drawing.Point(62, 90);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(197, 21);
+            this.textBox1.Size = new System.Drawing.Size(279, 21);
             this.textBox1.TabIndex = 11;
             this.textBox1.TabStop = false;
             this.textBox1.Text = "选择缩略图";
@@ -619,11 +620,12 @@
             this.textBox2.Location = new System.Drawing.Point(62, 119);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(197, 21);
+            this.textBox2.Size = new System.Drawing.Size(279, 21);
             this.textBox2.TabIndex = 12;
             this.textBox2.TabStop = false;
             this.textBox2.Text = "选择简介大图";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
             // 
             // label6
             // 
@@ -631,7 +633,7 @@
             this.label6.Location = new System.Drawing.Point(3, 148);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(256, 23);
+            this.label6.Size = new System.Drawing.Size(357, 23);
             this.label6.TabIndex = 28;
             this.label6.Text = "生活照：";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -643,7 +645,7 @@
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(3, 177);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(256, 124);
+            this.listBox1.Size = new System.Drawing.Size(346, 124);
             this.listBox1.TabIndex = 17;
             this.listBox1.TabStop = false;
             // 
@@ -651,7 +653,7 @@
             // 
             this.button19.Location = new System.Drawing.Point(3, 307);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(125, 31);
+            this.button19.Size = new System.Drawing.Size(170, 31);
             this.button19.TabIndex = 23;
             this.button19.TabStop = false;
             this.button19.Text = "添加";
@@ -659,9 +661,9 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(134, 307);
+            this.button20.Location = new System.Drawing.Point(179, 307);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(125, 31);
+            this.button20.Size = new System.Drawing.Size(170, 31);
             this.button20.TabIndex = 29;
             this.button20.TabStop = false;
             this.button20.Text = "删除";
@@ -692,13 +694,17 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(12, 149);
+            this.listBox2.Location = new System.Drawing.Point(12, 143);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(373, 280);
+            this.listBox2.Size = new System.Drawing.Size(370, 268);
             this.listBox2.TabIndex = 11;
             // 
             // Form1
@@ -778,6 +784,7 @@
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.ListBox listBox2;
     }
 }

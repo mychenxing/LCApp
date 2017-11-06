@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.IO;
 
 namespace LCApp {
     public partial class Form1 : Form {
@@ -21,34 +22,39 @@ namespace LCApp {
 
             string str2 = System.AppDomain.CurrentDomain.BaseDirectory;
             Console.WriteLine("地址："+str2);
-            ReadXmlData(@"C:\Users\Max-PC\Source\Repos\LCApp\Data.xml");
+            ReadXmlData(str2+ @"\Data.xml");//加载xml文档
+            getFileName(A_List1);
+            getFileName(B_List1);
+            getFileName(C_List1);
+            getFileName(D_List1);
         }
 
         /// <summary>
-        /// 定义存储文件夹地址的泛型数组,P~视频；A~市场一；B~市场二；C~市场三；D~市场四
+        /// 定义存储文件夹地址的泛型数组,P~视频；Str_TMP_1~市场一；Str_TMP_2~市场二；Str_TMP_3~市场三；Str_TMP_4~市场四
         /// </summary>
-        private List<string>Str_TMP = new List<string>();
-        public List<string> P_List = new List<string>();
-        
-        public List<string> A_List1 = new List<string>();
-        public List<string> A_List2 = new List<string>();
-        public List<string> A_List3 = new List<string>();
-        public List<string> A_List4 = new List<string>();
+        public List<string> P_List = new List<string>();//视频
 
-        public List<string> B_List1 = new List<string>();
-        public List<string> B_List2 = new List<string>();
-        public List<string> B_List3 = new List<string>();
-        public List<string> B_List4 = new List<string>();
+        private List<string> Str_TMP_1 = new List<string>();//市场一
+        private List<string> Str_TMP_2 = new List<string>();//市场二
+        private List<string> Str_TMP_3 = new List<string>();//市场三
+        private List<string> Str_TMP_4 = new List<string>();//市场四
 
-        public List<string> C_List1 = new List<string>();
-        public List<string> C_List2 = new List<string>();
-        public List<string> C_List3 = new List<string>();
-        public List<string> C_List4 = new List<string>();
 
-        public List<string> D_List1 = new List<string>();
-        public List<string> D_List2 = new List<string>();
-        public List<string> D_List3 = new List<string>();
-        public List<string> D_List4 = new List<string>();
+        public List<string> A_List1 = new List<string>();//市场一,90
+        public List<string> A_List2 = new List<string>();//市场一,80
+        public List<string> A_List3 = new List<string>();//市场一,70
+
+        public List<string> B_List1 = new List<string>();//市场二,90
+        public List<string> B_List2 = new List<string>();//市场二,80
+        public List<string> B_List3 = new List<string>();//市场二,70
+
+        public List<string> C_List1 = new List<string>();//市场三,90
+        public List<string> C_List2 = new List<string>();//市场三,80
+        public List<string> C_List3 = new List<string>();//市场三,70
+
+        public List<string> D_List1 = new List<string>();//市场四,90
+        public List<string> D_List2 = new List<string>();//市场四,80
+        public List<string> D_List3 = new List<string>();//市场四,70
 
 
         private void ReadXmlData(string str) {
@@ -59,36 +65,145 @@ namespace LCApp {
                 {
                     if (reader.Name=="name")
                     {
-                        Str_TMP.Add(reader.GetAttribute(0));
+                        P_List.Add(reader.GetAttribute(0));
                     }
                     if (reader.Name=="name1")
                     {
-                        Str_TMP.Add(reader.GetAttribute(0));
+                        Str_TMP_1.Add(reader.GetAttribute(0));
                     }
                     if (reader.Name=="name2")
                     {
-                        Str_TMP.Add(reader.GetAttribute(0));
+                        Str_TMP_2.Add(reader.GetAttribute(0));
                     }
                     if (reader.Name=="name3")
                     {
-                        Str_TMP.Add(reader.GetAttribute(0));
+                        Str_TMP_3.Add(reader.GetAttribute(0));
                     }
                     if (reader.Name=="name4")
                     {
-                        Str_TMP.Add(reader.GetAttribute(0));
+                        Str_TMP_4.Add(reader.GetAttribute(0));
                     }
                 }
                 if (reader.NodeType==XmlNodeType.EndElement)
                 {
                 }
             }
-            for (int i = 0; i < Str_TMP.Count; i++)
+
+            for (int i = 0; i < 9; i++)
             {
-                this.listBox2.Items.Add(Str_TMP[i]);
-                Console.WriteLine(Str_TMP[i]);
+                if (i ==0 || i==3 || i==6)
+                {
+                    A_List1.Add(Str_TMP_1[i]);//市场一,90
+                    B_List1.Add(Str_TMP_2[i]);//市场二,90
+                    C_List1.Add(Str_TMP_3[i]);//市场三,90
+                    D_List1.Add(Str_TMP_4[i]);//市场四,90
+                }
+                else if (i == 1 || i == 4 || i == 7)
+                {
+                    A_List2.Add(Str_TMP_1[i]);//市场一,80
+                    B_List2.Add(Str_TMP_2[i]);//市场二,80
+                    C_List2.Add(Str_TMP_3[i]);//市场三,80
+                    D_List2.Add(Str_TMP_4[i]);//市场四,80
+                }
+                else if (i == 2 || i == 5 || i == 8)
+                {
+                    A_List3.Add(Str_TMP_1[i]);//市场一,70
+                    B_List3.Add(Str_TMP_2[i]);//市场二,70
+                    C_List3.Add(Str_TMP_3[i]);//市场三,70
+                    D_List3.Add(Str_TMP_4[i]);//市场四,70
+                }
             }
+            
         }
         
+        public void getFileName(List<string> _List) {
+            var lists = new List<List<string>>();
+            for (int i = 0; i < _List.Count; i++)
+            {
+                var list = new List<string>();
+                lists.Add(list);
+            }
+
+            for (int j = 0; j < _List.Count; j++)
+            {
+                DirectoryInfo dir = new DirectoryInfo(_List[j]);
+                foreach (var item in dir.GetFiles("*"))
+                {
+                    if (item.Extension==".jpg"|| item.Extension==".png")
+                    {
+                        lists[j].Add(item.Name);
+                       // Console.WriteLine(item.Name);
+                    }
+                }
+            }
+            
+
+            List<Person> PersonAry = new List<Person>();
+            for (int m = 0; m < lists[0].Count; m++)
+            {
+                Person P = new Person();
+                string[] Str = new string[2];
+                string str = lists[0][m];
+                Str = str.Split('_');
+                P.ID = Str[0]; Console.Write("ID:" + P.ID);
+                str = Str[1];
+                Str = str.Split(',');
+                P.Name = Str[0]; Console.Write("  名字:" + P.Name);
+                str = Str[1];
+                Str = str.Split('.');
+                P.Level = Str[0]; Console.WriteLine("  级别:" + P.Level);
+                P.SrcImg = _List[0];
+                P.SrcInfo = _List[1];
+                P.SrcPhoto = _List[2];
+                PersonAry.Add(P); Console.WriteLine("***********");
+            }
+
+            for (int k = 0; k < lists.Count; k++)
+            {
+                for (int l = 0; l < lists[k].Count; l++)
+                {
+                    if (k==0)
+                    {
+                        Console.WriteLine("+++++缩略图+++++++");
+                        PersonAry[l].FullImgName = lists[k][l];
+                        Console.WriteLine("缩略图：" + PersonAry[l].SrcImg + lists[k][l]);
+                    }
+                    else if (k==1)
+                    {
+                        Console.WriteLine("+++++简介图+++++++");
+                        PersonAry[l].FullInfoName = lists[k][l];
+                        Console.WriteLine("简介图：" + PersonAry[l].SrcInfo + lists[k][l]);
+                    }
+                    else if (k==2)
+                    {
+                        Console.WriteLine("start……");
+                        for (int q = 0; q < PersonAry.Count; q++)
+                        {
+                            
+                            if (lists[k][l].IndexOf(PersonAry[q].Name) >=0 )
+                            {
+                                PersonAry[q].FullPhotosName.Add(lists[k][l]);
+                                Console.WriteLine("生活照图：" + PersonAry[q].SrcPhoto + lists[k][l]);
+                            }
+                        }
+                        Console.WriteLine("End……");
+                    }
+                }
+            }
+
+            for (int o = 0; o < PersonAry.Count; o++)
+            {
+                Console.WriteLine("****************");
+                Console.WriteLine(PersonAry[o].ID +"  "+PersonAry[o].Name+"  "+ PersonAry[o].Level);
+                Console.WriteLine("------------------");
+                for (int r = 0; r < PersonAry[o].FullPhotosName.Count; r++)
+                {
+                    //PersonAry[o].FullPhotoNames();
+                    Console.WriteLine(PersonAry[o].FullPhotosName[r]);
+                }
+            }
+        }
+
 
         /// <summary>
         /// 界面初始化显示方法
@@ -337,13 +452,19 @@ namespace LCApp {
             System.Environment.Exit(0);
         }
 
+        /// <summary>
+        /// 添加人员，选择缩略图
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBox1_Click(object sender, EventArgs e) {
             this.openFileDialog1.Multiselect = false;
             this.openFileDialog1.InitialDirectory = ".";
             this.openFileDialog1.Title = "请选择缩略图文件";
             this.openFileDialog1.Filter = "缩略图文件(*.jpg,*.png)|*.jpg;*.png";
-            this.openFileDialog1.ShowDialog();
-            if(openFileDialog1.FileName != string.Empty)
+            //this.openFileDialog1.ShowDialog();
+            //if (openFileDialog1.FileName != string.Empty)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
@@ -354,6 +475,33 @@ namespace LCApp {
                 catch
                 {
                     this.textBox1.Text = "选择缩略图";
+                    MessageBox.Show("错误");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 添加人员，选择简介图
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox2_Click(object sender, EventArgs e) {
+            this.openFileDialog2.Multiselect = false;
+            this.openFileDialog2.InitialDirectory = ".";
+            this.openFileDialog2.Title = "请选择简介图文件";
+            this.openFileDialog2.Filter = "简介图文件(*.jpg,*.png)|*.jpg;*.png";
+            //this.openFileDialog2.ShowDialog();
+            //if (openFileDialog2.FileName != string.Empty)
+            if (openFileDialog2.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string file = this.openFileDialog2.FileName;
+                    this.textBox2.Text = file;
+                }
+                catch
+                {
+                    this.textBox2.Text = "选择简介大图";
                     MessageBox.Show("错误");
                 }
             }
