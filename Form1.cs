@@ -67,6 +67,22 @@ namespace LCApp {
         public List<string> D_List2 = new List<string>();//市场四,80
         public List<string> D_List3 = new List<string>();//市场四,70
 
+        
+        List<Person> PIC11 = new List<Person>();//市场一,90 -->暂存读取的文件数据
+        List<Person> PIC12 = new List<Person>();//市场一,80 -->暂存读取的文件数据
+        List<Person> PIC13 = new List<Person>();//市场一,70 -->暂存读取的文件数据
+
+        List<Person> PIC21 = new List<Person>();//市场二,90 -->暂存读取的文件数据
+        List<Person> PIC22 = new List<Person>();//市场二,80 -->暂存读取的文件数据
+        List<Person> PIC23 = new List<Person>();//市场二,70 -->暂存读取的文件数据
+
+        List<Person> PIC31 = new List<Person>();//市场三,90 -->暂存读取的文件数据
+        List<Person> PIC32 = new List<Person>();//市场三,80 -->暂存读取的文件数据
+        List<Person> PIC33 = new List<Person>();//市场三,70 -->暂存读取的文件数据
+
+        List<Person> PIC41 = new List<Person>();//市场四,90 -->暂存读取的文件数据
+        List<Person> PIC42 = new List<Person>();//市场四,80 -->暂存读取的文件数据
+        List<Person> PIC43 = new List<Person>();//市场四,70 -->暂存读取的文件数据
 
         private void ReadXmlData(string str) {
             XmlTextReader reader = new XmlTextReader(str);
@@ -233,6 +249,7 @@ namespace LCApp {
                 this.dataGridView1.Rows[i].Cells[0].Value = P[i].ID;
                 this.dataGridView1.Rows[i].Cells[1].Value = P[i].Name;
                 this.dataGridView1.Rows[i].Cells[2].Value = P[i].Level;
+                Console.WriteLine(this.dataGridView1.Rows[i].Cells[6].Value);
             }
         }
 
@@ -388,9 +405,9 @@ namespace LCApp {
             GridView(true);// 表格 隐藏
             button5.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(A_List1);//市场一,90
-            OutPutGridView(PIC);
+            if (PIC11.Count == 0)
+                PIC11 = GetFileName(A_List1);//市场一,90
+            OutPutGridView(PIC11);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -401,9 +418,9 @@ namespace LCApp {
             GridView(true);
             button6.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(A_List2);//市场一,80
-            OutPutGridView(PIC);
+            if (PIC12.Count == 0)
+                PIC12 = GetFileName(A_List2);//市场一,80
+            OutPutGridView(PIC12);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -415,9 +432,9 @@ namespace LCApp {
             GridView(true);
             button7.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(A_List3);//市场一,70
-            OutPutGridView(PIC);
+            if (PIC13.Count == 0)
+                PIC13 = GetFileName(A_List3);//市场一,70
+            OutPutGridView(PIC13);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -428,9 +445,9 @@ namespace LCApp {
             GridView(true);
             this.button8.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(B_List1);//市场二,90
-            OutPutGridView(PIC);
+            if (PIC21.Count == 0)
+                PIC21 = GetFileName(B_List1);//市场二,90
+            OutPutGridView(PIC21);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -441,9 +458,9 @@ namespace LCApp {
             GridView(true);
             this.button9.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(B_List2);//市场二,80
-            OutPutGridView(PIC);
+            if (PIC22.Count == 0)
+                PIC22 = GetFileName(B_List2);//市场二,80
+            OutPutGridView(PIC22);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -454,9 +471,9 @@ namespace LCApp {
             GridView(true);
             this.button10.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(B_List3);//市场二,70
-            OutPutGridView(PIC);
+            if (PIC23.Count == 0)
+                PIC23 = GetFileName(B_List3);//市场二,70
+            OutPutGridView(PIC23);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -467,9 +484,9 @@ namespace LCApp {
             GridView(true);
             this.button11.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(C_List1);//市场三,90
-            OutPutGridView(PIC);
+            if (PIC31.Count == 0)
+                PIC31 = GetFileName(C_List1);//市场三,90
+            OutPutGridView(PIC31);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -480,9 +497,9 @@ namespace LCApp {
             GridView(true);
             this.button12.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(C_List2);//市场三,80
-            OutPutGridView(PIC);
+            if (PIC32.Count == 0)
+                PIC32 = GetFileName(C_List2);//市场三,80
+            OutPutGridView(PIC32);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -493,9 +510,9 @@ namespace LCApp {
             GridView(true);
             this.button13.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(C_List3);//市场三,70
-            OutPutGridView(PIC);
+            if (PIC33.Count == 0)
+                PIC33 = GetFileName(C_List3);//市场三,70
+            OutPutGridView(PIC33);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -506,9 +523,9 @@ namespace LCApp {
             GridView(true);
             this.button14.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(D_List1);//市场四,90
-            OutPutGridView(PIC);
+            if (PIC41.Count == 0)
+                PIC41 = GetFileName(D_List1);//市场四,90
+            OutPutGridView(PIC41);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -519,9 +536,9 @@ namespace LCApp {
             GridView(true);
             this.button15.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(D_List2);//市场四,80
-            OutPutGridView(PIC);
+            if (PIC42.Count == 0)
+                PIC42 = GetFileName(D_List2);//市场四,80
+            OutPutGridView(PIC42);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -532,9 +549,9 @@ namespace LCApp {
             GridView(true);
             this.button16.Enabled = false;
 
-            List<Person> PIC = new List<Person>();
-            PIC = GetFileName(D_List3);//市场四,70
-            OutPutGridView(PIC);
+            if (PIC43.Count == 0)
+                PIC43 = GetFileName(D_List3);//市场四,70
+            OutPutGridView(PIC43);
 
             picture(true);
             Add_Exit_Btn(true);
@@ -615,6 +632,10 @@ namespace LCApp {
         //添加人员面板，取消按钮
         private void button22_Click(object sender, EventArgs e) {
             this.panel1.Visible = true;
+        }
+
+        private void dataGridView1_Click(object sender, EventArgs e) {
+           // Console.WriteLine(this.dataGridView1.Columns["SrcImg"].);
         }
     }
 }

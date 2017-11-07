@@ -372,6 +372,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(389, 351);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.TabStop = false;
+            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
             // button17
             // 
