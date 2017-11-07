@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 
+
 namespace LCApp {
     public partial class Form1 : Form {
         public Form1() {
@@ -23,10 +24,20 @@ namespace LCApp {
             string str2 = System.AppDomain.CurrentDomain.BaseDirectory;
             Console.WriteLine("地址："+str2);
             ReadXmlData(str2+ @"\Data.xml");//加载xml文档
-            getFileName(A_List1);
-            getFileName(B_List1);
-            getFileName(C_List1);
-            getFileName(D_List1);
+            //getFileName(A_List1);//市场一,90
+            //getFileName(B_List1);//市场二,90
+            //getFileName(C_List1);//市场三,90
+            //getFileName(D_List1);//市场四,90
+
+            //getFileName(A_List2);//市场一,80
+            //getFileName(B_List2);//市场二,80
+            //getFileName(C_List2);//市场三,80
+            //getFileName(D_List2);//市场四,80
+
+            //getFileName(A_List3);//市场一,70
+            //getFileName(B_List3);//市场二,70
+            //getFileName(C_List3);//市场三,70
+            //getFileName(D_List3);//市场四,70
         }
 
         /// <summary>
@@ -116,7 +127,7 @@ namespace LCApp {
             
         }
         
-        public void getFileName(List<string> _List) {
+        public List<Person> GetFileName(List<string> _List) {
             var lists = new List<List<string>>();
             for (int i = 0; i < _List.Count; i++)
             {
@@ -196,14 +207,34 @@ namespace LCApp {
                 Console.WriteLine("****************");
                 Console.WriteLine(PersonAry[o].ID +"  "+PersonAry[o].Name+"  "+ PersonAry[o].Level);
                 Console.WriteLine("------------------");
+                
                 for (int r = 0; r < PersonAry[o].FullPhotosName.Count; r++)
                 {
-                    //PersonAry[o].FullPhotoNames();
                     Console.WriteLine(PersonAry[o].FullPhotosName[r]);
                 }
             }
+            return PersonAry;
         }
 
+        /// <summary>
+        /// 输出显示到表格
+        /// </summary>
+        /// <param name="P">Person Array</param>
+        public void OutPutGridView(List<Person> P) {
+            this.dataGridView1.DataSource = P;
+            this.dataGridView1.Columns["ID"].Visible = false;
+            this.dataGridView1.Columns["Name"].Visible = false;
+            this.dataGridView1.Columns["Level"].Visible = false;
+            this.dataGridView1.Columns["SrcImg"].Visible = false;
+            this.dataGridView1.Columns["SrcInfo"].Visible = false;
+            this.dataGridView1.Columns["SrcPhoto"].Visible = false;
+            for (int i = 0; i < P.Count; i++)
+            {
+                this.dataGridView1.Rows[i].Cells[0].Value = P[i].ID;
+                this.dataGridView1.Rows[i].Cells[1].Value = P[i].Name;
+                this.dataGridView1.Rows[i].Cells[2].Value = P[i].Level;
+            }
+        }
 
         /// <summary>
         /// 界面初始化显示方法
@@ -355,97 +386,158 @@ namespace LCApp {
         private void button5_Click(object sender, EventArgs e) {
             ChildBtnAry();  // 四大市场子按钮组——启用选项
             GridView(true);// 表格 隐藏
+            button5.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(A_List1);//市场一,90
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            button5.Enabled = false;
         }
 
         private void button6_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            button6.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(A_List2);//市场一,80
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            button6.Enabled = false;
+            
         }
 
         private void button7_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            button7.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(A_List3);//市场一,70
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            button7.Enabled = false;
         }
 
         private void button8_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            this.button8.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(B_List1);//市场二,90
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            this.button8.Enabled = false;
         }
 
         private void button9_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            this.button9.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(B_List2);//市场二,80
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            this.button9.Enabled = false;
         }
 
         private void button10_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            this.button10.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(B_List3);//市场二,70
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            this.button10.Enabled = false;
         }
 
         private void button11_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            this.button11.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(C_List1);//市场三,90
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            this.button11.Enabled = false;
         }
 
         private void button12_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            this.button12.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(C_List2);//市场三,80
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            this.button12.Enabled = false;
         }
 
         private void button13_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            this.button13.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(C_List3);//市场三,70
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            this.button13.Enabled = false;
         }
 
         private void button14_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            this.button14.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(D_List1);//市场四,90
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            this.button14.Enabled = false;
         }
 
         private void button15_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            this.button15.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(D_List2);//市场四,80
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            this.button15.Enabled = false;
         }
 
         private void button16_Click(object sender, EventArgs e) {
             ChildBtnAry();
             GridView(true);
+            this.button16.Enabled = false;
+
+            List<Person> PIC = new List<Person>();
+            PIC = GetFileName(D_List3);//市场四,70
+            OutPutGridView(PIC);
+
             picture(true);
             Add_Exit_Btn(true);
-            this.button16.Enabled = false;
         }
 
         private void button18_Click(object sender, EventArgs e) {

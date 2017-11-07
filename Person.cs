@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace LCApp {
     public class Person {
@@ -20,7 +21,12 @@ namespace LCApp {
         /// <summary>
         /// 清除生活照数组的元素
         /// </summary>
-        public void FullPhotoNames() {
+        public void DeleteFullPhotoNames() {
+            foreach (var item in FullPhotosName)
+            {
+                File.Delete(@srcPhoto + item);
+            }
+
             FullPhotosName.Clear();
         }
         /// <summary>
