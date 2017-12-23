@@ -14,8 +14,8 @@ namespace LCApp {
         private string srcImg;//缩略图存放路径
         private string srcInfo;//简介图存放路径
         private string srcPhoto;//生活照存放路径
-        public string FullImgName; //缩略图文件名
-        public string FullInfoName;//简介图文件名
+        private string imgName; //缩略图文件名
+        private string infoName;//简介图文件名
         public List<string> FullPhotosName = new List<string>();//生活照文件名数组
 
         /// <summary>
@@ -81,6 +81,24 @@ namespace LCApp {
         {
             get { return srcPhoto; }
             set { srcPhoto = value; }
+        }
+
+        /// <summary>
+        /// 缩略图文件名
+        /// </summary>
+        public string ImgName
+        {
+            get { return imgName; }
+            set { imgName = value; }
+        }
+
+        /// <summary>
+        /// 简介图文件名
+        /// </summary>
+        public string InfoName
+        {
+            get { return infoName; }
+            set { infoName = value; }
         }
     }
 }

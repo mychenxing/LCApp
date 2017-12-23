@@ -10,17 +10,15 @@ using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 
-
 namespace LCApp {
     public partial class Form1 : Form {
         public Form1() {
             InitializeComponent();
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(this.panel1.Width,this.panel1.Height);//主界面显示内容的宽高
-
+            
             Interface();    //界面初始化显示方法
             BtnAry();       // 四大市场子按钮组——隐藏
-
             string str2 = System.AppDomain.CurrentDomain.BaseDirectory;
             Console.WriteLine("地址："+str2);
             ReadXmlData(str2+ @"\Data.xml");//加载xml文档
@@ -39,6 +37,8 @@ namespace LCApp {
             //getFileName(C_List3);//市场三,70
             //getFileName(D_List3);//市场四,70
         }
+
+        
 
         /// <summary>
         /// 定义存储文件夹地址的泛型数组,P~视频；Str_TMP_1~市场一；Str_TMP_2~市场二；Str_TMP_3~市场三；Str_TMP_4~市场四
@@ -83,7 +83,7 @@ namespace LCApp {
         List<Person> PIC41 = new List<Person>();//市场四,90 -->暂存读取的文件数据
         List<Person> PIC42 = new List<Person>();//市场四,80 -->暂存读取的文件数据
         List<Person> PIC43 = new List<Person>();//市场四,70 -->暂存读取的文件数据
-
+        
         private void ReadXmlData(string str) {
             XmlTextReader reader = new XmlTextReader(str);
             while (reader.Read())
@@ -179,9 +179,9 @@ namespace LCApp {
                 str = Str[1];
                 Str = str.Split('.');
                 P.Level = Str[0]; Console.WriteLine("  级别:" + P.Level);
-                P.SrcImg = _List[0];
-                P.SrcInfo = _List[1];
-                P.SrcPhoto = _List[2];
+                P.SrcImg = _List[0]; Console.WriteLine("缩略图路径：………………………………     : " + _List[0]);
+                P.SrcInfo = _List[1]; Console.WriteLine("简介图路径：………………………………     : " + _List[1]);
+                P.SrcPhoto = _List[2]; Console.WriteLine("生活图路径：………………………………     : " + _List[2]);
                 PersonAry.Add(P); Console.WriteLine("***********");
             }
 
@@ -192,13 +192,13 @@ namespace LCApp {
                     if (k==0)
                     {
                         Console.WriteLine("+++++缩略图+++++++");
-                        PersonAry[l].FullImgName = lists[k][l];
+                        PersonAry[l].ImgName = lists[k][l]; Console.WriteLine("缩略图文件名：………………………………     : " + lists[k][l]);
                         Console.WriteLine("缩略图：" + PersonAry[l].SrcImg + lists[k][l]);
                     }
                     else if (k==1)
                     {
                         Console.WriteLine("+++++简介图+++++++");
-                        PersonAry[l].FullInfoName = lists[k][l];
+                        PersonAry[l].InfoName = lists[k][l]; Console.WriteLine("简介图文件名：………………………………     : " + lists[k][l]);
                         Console.WriteLine("简介图：" + PersonAry[l].SrcInfo + lists[k][l]);
                     }
                     else if (k==2)
@@ -244,13 +244,17 @@ namespace LCApp {
             this.dataGridView1.Columns["SrcImg"].Visible = false;
             this.dataGridView1.Columns["SrcInfo"].Visible = false;
             this.dataGridView1.Columns["SrcPhoto"].Visible = false;
+            this.dataGridView1.Columns["ImgName"].Visible = false;
+            this.dataGridView1.Columns["InfoName"].Visible = false;
             for (int i = 0; i < P.Count; i++)
             {
                 this.dataGridView1.Rows[i].Cells[0].Value = P[i].ID;
                 this.dataGridView1.Rows[i].Cells[1].Value = P[i].Name;
                 this.dataGridView1.Rows[i].Cells[2].Value = P[i].Level;
-                Console.WriteLine(this.dataGridView1.Rows[i].Cells[6].Value);
             }
+            string str = this.dataGridView1.Rows[0].Cells[6].Value.ToString() + this.dataGridView1.Rows[0].Cells[9].Value;
+            Console.WriteLine(str);
+            this.pictureBox1.Image = Image.FromFile(str);
         }
 
         /// <summary>
@@ -348,8 +352,8 @@ namespace LCApp {
         void Add_Exit_Btn(Boolean B) {
             this.button17.Visible = B;
             this.button18.Visible = B;
-            this.button23.Visible = B;
-            this.button23.Enabled = false;
+            this.button19.Visible = B;
+            this.button19.Enabled = false;
         }
 
         //市场一
@@ -626,7 +630,25 @@ namespace LCApp {
 
         //主界面，添加人员按钮
         private void button17_Click(object sender, EventArgs e) {
-            this.panel1.Visible = false;
+            
+            Info formInfo = new Info();
+            DialogResult result = formInfo.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {//取消
+
+            }
+            else if (result == DialogResult.OK)
+            {//添加
+                this.panel1.Visible = false;
+            }
+            else if (result == DialogResult.Retry)
+            {//编辑
+                this.panel1.Visible = false;
+            }
+            else if (result == DialogResult.No)
+            {//删除
+
+            }
         }
 
         //添加人员面板，取消按钮
@@ -635,7 +657,11 @@ namespace LCApp {
         }
 
         private void dataGridView1_Click(object sender, EventArgs e) {
-           // Console.WriteLine(this.dataGridView1.Columns["SrcImg"].);
+            int i = int.Parse(this.dataGridView1.CurrentCellAddress.Y.ToString());
+            string str = this.dataGridView1.Rows[i].Cells[6].Value.ToString() + this.dataGridView1.Rows[i].Cells[9].Value;
+            Console.WriteLine(str);
+            this.pictureBox1.Image = Image.FromFile(str);
         }
+        
     }
 }
