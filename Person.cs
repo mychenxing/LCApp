@@ -8,15 +8,18 @@ using System.IO;
 namespace LCApp {
     public class Person {
         public Person() { }
-        private string id;//序号
-        private string name;//名字
-        private string level;//级别
-        private string srcImg;//缩略图存放路径
-        private string srcInfo;//简介图存放路径
-        private string srcPhoto;//生活照存放路径
-        private string imgName; //缩略图文件名
-        private string infoName;//简介图文件名
-        public List<string> FullPhotosName = new List<string>();//生活照文件名数组
+        private string id;                  //序号——》输出到表格中 隐藏
+        private string name;            //名字——》输出到表格中 隐藏
+        private string level;              //级别——》输出到表格中 隐藏
+        private string srcImg;          //缩略图存放路径——》输出到表格中 隐藏
+        private string srcInfo;         //简介图存放路径——》输出到表格中 隐藏
+        private string srcPhoto;      //生活照存放路径——》输出到表格中 隐藏
+        private string imgName;     //缩略图文件名——》输出到表格中 隐藏
+        private string infoName;    //简介图文件名——》输出到表格中 隐藏
+        //public List<string> FullPhotosName = new List<string>();//生活照文件名数组——》输出到表格中 隐藏
+        private  List<string> fullPhotosName = new List<string>();//生活照文件名数组——》输出到表格中 隐藏
+
+
 
         /// <summary>
         /// 清除生活照数组的元素
@@ -99,6 +102,13 @@ namespace LCApp {
         {
             get { return infoName; }
             set { infoName = value; }
+        }
+
+
+        public List<string> FullPhotosName
+        {
+            get { return fullPhotosName; }
+            set { fullPhotosName = value; }
         }
     }
 }

@@ -19,9 +19,9 @@ namespace LCApp {
             
             Interface();    //界面初始化显示方法
             BtnAry();       // 四大市场子按钮组——隐藏
-            string str2 = System.AppDomain.CurrentDomain.BaseDirectory;
-            Console.WriteLine("地址："+str2);
-            ReadXmlData(str2+ @"\Data.xml");//加载xml文档
+            string path = System.AppDomain.CurrentDomain.BaseDirectory;
+            Console.WriteLine("地址："+ path);
+            ReadXmlData(path + @"\Data.xml");//加载xml文档
             //getFileName(A_List1);//市场一,90
             //getFileName(B_List1);//市场二,90
             //getFileName(C_List1);//市场三,90
@@ -351,7 +351,7 @@ namespace LCApp {
         /// <param name="B"></param>
         void Add_Exit_Btn(Boolean B) {
             this.button17.Visible = B;
-            this.button18.Visible = B;
+            //this.button18.Visible = B;
             this.button19.Visible = B;
             this.button19.Enabled = false;
         }
@@ -410,7 +410,14 @@ namespace LCApp {
             button5.Enabled = false;
 
             if (PIC11.Count == 0)
+            {
                 PIC11 = GetFileName(A_List1);//市场一,90
+            }
+            else if (PIC11.Count > 0)
+            {
+                PIC11.Clear();
+                PIC11 = GetFileName(A_List1);//市场一,90
+            }
             OutPutGridView(PIC11);
 
             picture(true);
@@ -611,6 +618,7 @@ namespace LCApp {
                 {
                     string file = this.openFileDialog2.FileName;
                     this.textBox2.Text = file;
+                    this.pictureBox3.Image = Image.FromFile(file);
                 }
                 catch
                 {
@@ -619,14 +627,7 @@ namespace LCApp {
                 }
             }
         }
-
-        private void label2_Click(object sender, EventArgs e) {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e) {
-
-        }
+        
 
         //主界面，添加人员按钮
         private void button17_Click(object sender, EventArgs e) {

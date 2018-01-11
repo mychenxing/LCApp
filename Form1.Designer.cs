@@ -24,8 +24,8 @@
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -55,6 +55,7 @@
             this.button18 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button22 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -83,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -331,7 +333,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(405, 92);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(147, 175);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
@@ -341,27 +343,27 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(10, 92);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -443,6 +445,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.pictureBox3);
             this.panel2.Controls.Add(this.button22);
             this.panel2.Controls.Add(this.flowLayoutPanel1);
             this.panel2.Controls.Add(this.pictureBox2);
@@ -453,11 +456,22 @@
             this.panel2.Size = new System.Drawing.Size(563, 447);
             this.panel2.TabIndex = 11;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox3.ImageLocation = "";
+            this.pictureBox3.Location = new System.Drawing.Point(22, 273);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(432, 162);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 31;
+            this.pictureBox3.TabStop = false;
+            // 
             // button22
             // 
-            this.button22.Location = new System.Drawing.Point(381, 355);
+            this.button22.Location = new System.Drawing.Point(468, 387);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(147, 48);
+            this.button22.Size = new System.Drawing.Size(78, 48);
             this.button22.TabIndex = 30;
             this.button22.TabStop = false;
             this.button22.Text = "取消";
@@ -467,6 +481,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.textBox3);
             this.flowLayoutPanel1.Controls.Add(this.label2);
@@ -481,9 +496,9 @@
             this.flowLayoutPanel1.Controls.Add(this.listBox1);
             this.flowLayoutPanel1.Controls.Add(this.button19);
             this.flowLayoutPanel1.Controls.Add(this.button20);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(15, 60);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(22, 12);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(360, 344);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(375, 225);
             this.flowLayoutPanel1.TabIndex = 13;
             // 
             // label1
@@ -492,16 +507,16 @@
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 23);
+            this.label1.Size = new System.Drawing.Size(33, 23);
             this.label1.TabIndex = 18;
-            this.label1.Text = "姓名：";
+            this.label1.Text = "姓名";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(62, 3);
+            this.textBox3.Location = new System.Drawing.Point(42, 3);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(279, 21);
+            this.textBox3.Size = new System.Drawing.Size(100, 21);
             this.textBox3.TabIndex = 25;
             this.textBox3.TabStop = false;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -509,12 +524,12 @@
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.Location = new System.Drawing.Point(3, 32);
+            this.label2.Location = new System.Drawing.Point(148, 3);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 23);
+            this.label2.Size = new System.Drawing.Size(57, 23);
             this.label2.TabIndex = 19;
-            this.label2.Text = "市场：";
+            this.label2.Text = "市场分类";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // domainUpDown1
@@ -525,24 +540,24 @@
             this.domainUpDown1.Items.Add("来傅莲/杨辉 市场");
             this.domainUpDown1.Items.Add("彭焰 市场");
             this.domainUpDown1.Items.Add("韩振铎/王春洁 市场");
-            this.domainUpDown1.Location = new System.Drawing.Point(62, 33);
+            this.domainUpDown1.Location = new System.Drawing.Point(211, 4);
             this.domainUpDown1.Name = "domainUpDown1";
             this.domainUpDown1.ReadOnly = true;
-            this.domainUpDown1.Size = new System.Drawing.Size(279, 21);
+            this.domainUpDown1.Size = new System.Drawing.Size(151, 21);
             this.domainUpDown1.TabIndex = 15;
             this.domainUpDown1.TabStop = false;
-            this.domainUpDown1.Text = "市场分类";
+            this.domainUpDown1.Text = "市场";
             this.domainUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.Location = new System.Drawing.Point(3, 61);
+            this.label3.Location = new System.Drawing.Point(3, 32);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 23);
+            this.label3.Size = new System.Drawing.Size(33, 23);
             this.label3.TabIndex = 20;
-            this.label3.Text = "级别：";
+            this.label3.Text = "级别";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // domainUpDown2
@@ -551,10 +566,10 @@
             this.domainUpDown2.Items.Add("70");
             this.domainUpDown2.Items.Add("80");
             this.domainUpDown2.Items.Add("90");
-            this.domainUpDown2.Location = new System.Drawing.Point(62, 61);
+            this.domainUpDown2.Location = new System.Drawing.Point(42, 32);
             this.domainUpDown2.Name = "domainUpDown2";
             this.domainUpDown2.ReadOnly = true;
-            this.domainUpDown2.Size = new System.Drawing.Size(279, 21);
+            this.domainUpDown2.Size = new System.Drawing.Size(54, 21);
             this.domainUpDown2.TabIndex = 16;
             this.domainUpDown2.TabStop = false;
             this.domainUpDown2.Text = "级别";
@@ -563,21 +578,21 @@
             // label4
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.Location = new System.Drawing.Point(3, 90);
+            this.label4.Location = new System.Drawing.Point(102, 32);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 23);
+            this.label4.Size = new System.Drawing.Size(52, 23);
             this.label4.TabIndex = 26;
-            this.label4.Text = "缩略图：";
+            this.label4.Text = "缩略图";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox1
             // 
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox1.Location = new System.Drawing.Point(62, 90);
+            this.textBox1.Location = new System.Drawing.Point(160, 32);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(279, 21);
+            this.textBox1.Size = new System.Drawing.Size(77, 21);
             this.textBox1.TabIndex = 11;
             this.textBox1.TabStop = false;
             this.textBox1.Text = "选择缩略图";
@@ -587,21 +602,21 @@
             // label5
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.Location = new System.Drawing.Point(3, 119);
+            this.label5.Location = new System.Drawing.Point(243, 32);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 23);
+            this.label5.Size = new System.Drawing.Size(42, 23);
             this.label5.TabIndex = 27;
-            this.label5.Text = "简介图：";
+            this.label5.Text = "简介图";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox2
             // 
             this.textBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox2.Location = new System.Drawing.Point(62, 119);
+            this.textBox2.Location = new System.Drawing.Point(291, 32);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(279, 21);
+            this.textBox2.Size = new System.Drawing.Size(77, 21);
             this.textBox2.TabIndex = 12;
             this.textBox2.TabStop = false;
             this.textBox2.Text = "选择简介大图";
@@ -611,10 +626,10 @@
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label6.Location = new System.Drawing.Point(3, 148);
+            this.label6.Location = new System.Drawing.Point(3, 97);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(357, 23);
+            this.label6.Size = new System.Drawing.Size(53, 39);
             this.label6.TabIndex = 28;
             this.label6.Text = "生活照：";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -624,17 +639,17 @@
             this.listBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(3, 177);
+            this.listBox1.Location = new System.Drawing.Point(62, 61);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(346, 124);
+            this.listBox1.Size = new System.Drawing.Size(306, 112);
             this.listBox1.TabIndex = 17;
             this.listBox1.TabStop = false;
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(3, 307);
+            this.button19.Location = new System.Drawing.Point(3, 179);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(170, 31);
+            this.button19.Size = new System.Drawing.Size(77, 31);
             this.button19.TabIndex = 23;
             this.button19.TabStop = false;
             this.button19.Text = "添加";
@@ -642,9 +657,9 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(179, 307);
+            this.button20.Location = new System.Drawing.Point(86, 179);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(170, 31);
+            this.button20.Size = new System.Drawing.Size(68, 31);
             this.button20.TabIndex = 29;
             this.button20.TabStop = false;
             this.button20.Text = "删除";
@@ -654,18 +669,18 @@
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.ImageLocation = "";
-            this.pictureBox2.Location = new System.Drawing.Point(381, 59);
+            this.pictureBox2.Location = new System.Drawing.Point(403, 40);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(147, 175);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(381, 301);
+            this.button21.Location = new System.Drawing.Point(468, 273);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(147, 48);
+            this.button21.Size = new System.Drawing.Size(78, 48);
             this.button21.TabIndex = 29;
             this.button21.TabStop = false;
             this.button21.Text = "上传";
@@ -700,6 +715,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -758,6 +774,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
 
