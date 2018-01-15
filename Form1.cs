@@ -839,24 +839,24 @@ namespace LCApp {
             }
             else if (result == DialogResult.No)
             {//删除
-                DialogResult delResult =
-                    MessageBox.Show(@"确定删除吗？", @"提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult delResult = MessageBox.Show(@"确定删除吗？", @"提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (delResult == DialogResult.Yes)
                 {
                     pictureBox1.Image = null;
                     File.Delete(PersonSrcImgPath);//传入的 缩略图文件绝对路径
-                    /*File.Delete(PersonSrcInfoPath);//传入的 简介图文件绝对路径
+
+                    File.Delete(PersonSrcInfoPath);//传入的 简介图文件绝对路径
                     for (int i = 0; i < PersonSrcPhotoPathList.Count; i++)
                     {
                         File.Delete(PersonSrcPhotoPathList[i]);//传入的 生活照文件数组绝对路径
                     }
                     PersonSrcPhotoPathList.Clear();//清空路径元素
-                    */
+                    
                     MessageBox.Show(@"已删除人员");
                 }
                 else
                 {
-                    //MessageBox.Show(@"删除已取消");
+                    MessageBox.Show(@"删除已取消");
                 }
             }
         }
@@ -866,7 +866,11 @@ namespace LCApp {
             panel1.Visible = true;
 
         }
-
+        /// <summary>
+        /// 点击表格，获取人员信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_Click(object sender, EventArgs e) {
 
             int i = int.Parse(dataGridView1.CurrentCellAddress.Y.ToString());
@@ -948,11 +952,11 @@ namespace LCApp {
                     //pictureBox1.Image = null;
                     //pictureBox2.Image = null;
                     //pictureBox3.Image = null;
-                    //File.Move(PersonSrcImgPath, PersonSrcImg + imgName);
-                    //File.Move(PersonSrcInfoPath, PersonSrcInfo + infoName);
+                    File.Move(PersonSrcImgPath, PersonSrcImg + imgName);
+                    File.Move(PersonSrcInfoPath, PersonSrcInfo + infoName);
 
-                    File.Move(PersonSrcImgPath, @"F:\MyFile\Data\" + imgName);
-                    File.Move(PersonSrcInfoPath, @"F:\MyFile\Data\" + infoName);
+                    //File.Move(PersonSrcImgPath, @"F:\MyFile\Data\" + imgName);
+                    //File.Move(PersonSrcInfoPath, @"F:\MyFile\Data\" + infoName);
 
                     Console.WriteLine(PersonSrcImg + imgName);
                     Console.WriteLine(PersonSrcInfo + infoName);
