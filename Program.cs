@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
@@ -23,8 +20,10 @@ namespace LCApp {
             {
                 clientSocket.Connect(new IPEndPoint(ip, 8081));
                 //clientSocket.Close();
-                Thread t1 = new Thread(new ParameterizedThreadStart(TestMethod));
-                t1.IsBackground = true;
+                Thread t1 = new Thread(TestMethod)
+                {
+                    IsBackground = true
+                };
                 t1.Start(clientSocket);
                 Application.Run(new Form1());
             }
@@ -41,15 +40,18 @@ namespace LCApp {
             {
                 try
                 {
-                    Thread.Sleep(1000);    //等待1秒钟  
+                    Thread.Sleep(3000);    //等待1秒钟  
                     string sendMessage = "Heartbeat Message：" + DateTime.Now;
                     byte[] byteArray = System.Text.Encoding.Default.GetBytes(sendMessage);
-                    datastr.Send(byteArray);
+                    if (datastr != null) datastr.Send(byteArray);
                 }
                 catch
                 {
-                    datastr.Shutdown(SocketShutdown.Both);
-                    datastr.Close();
+                    if (datastr != null)
+                    {
+                        datastr.Shutdown(SocketShutdown.Both);
+                        datastr.Close();
+                    }
                     Application.Restart();
                     break;
                 }

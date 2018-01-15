@@ -58,18 +58,21 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button22 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.domainUpDown2 = new System.Windows.Forms.DomainUpDown();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -482,18 +485,21 @@
             // 
             this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel1.Controls.Add(this.label7);
+            this.flowLayoutPanel1.Controls.Add(this.textBox6);
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.textBox3);
             this.flowLayoutPanel1.Controls.Add(this.label2);
-            this.flowLayoutPanel1.Controls.Add(this.domainUpDown1);
+            this.flowLayoutPanel1.Controls.Add(this.textBox4);
             this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Controls.Add(this.domainUpDown2);
+            this.flowLayoutPanel1.Controls.Add(this.textBox5);
             this.flowLayoutPanel1.Controls.Add(this.label4);
             this.flowLayoutPanel1.Controls.Add(this.textBox1);
             this.flowLayoutPanel1.Controls.Add(this.label5);
             this.flowLayoutPanel1.Controls.Add(this.textBox2);
             this.flowLayoutPanel1.Controls.Add(this.label6);
             this.flowLayoutPanel1.Controls.Add(this.listBox1);
+            this.flowLayoutPanel1.Controls.Add(this.label8);
             this.flowLayoutPanel1.Controls.Add(this.button19);
             this.flowLayoutPanel1.Controls.Add(this.button20);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(22, 12);
@@ -501,20 +507,40 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(375, 225);
             this.flowLayoutPanel1.TabIndex = 13;
             // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label7.Location = new System.Drawing.Point(3, 3);
+            this.label7.Margin = new System.Windows.Forms.Padding(3);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 23);
+            this.label7.TabIndex = 32;
+            this.label7.Text = "序号";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(67, 3);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(77, 21);
+            this.textBox6.TabIndex = 33;
+            this.textBox6.TabStop = false;
+            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Location = new System.Drawing.Point(150, 3);
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 23);
+            this.label1.Size = new System.Drawing.Size(75, 23);
             this.label1.TabIndex = 18;
             this.label1.Text = "姓名";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(42, 3);
+            this.textBox3.Location = new System.Drawing.Point(231, 3);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 21);
             this.textBox3.TabIndex = 25;
@@ -524,7 +550,7 @@
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label2.Location = new System.Drawing.Point(148, 3);
+            this.label2.Location = new System.Drawing.Point(3, 32);
             this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 23);
@@ -532,27 +558,21 @@
             this.label2.Text = "市场分类";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // domainUpDown1
+            // textBox4
             // 
-            this.domainUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.domainUpDown1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.domainUpDown1.Items.Add("刘莉 市场");
-            this.domainUpDown1.Items.Add("来傅莲/杨辉 市场");
-            this.domainUpDown1.Items.Add("彭焰 市场");
-            this.domainUpDown1.Items.Add("韩振铎/王春洁 市场");
-            this.domainUpDown1.Location = new System.Drawing.Point(211, 4);
-            this.domainUpDown1.Name = "domainUpDown1";
-            this.domainUpDown1.ReadOnly = true;
-            this.domainUpDown1.Size = new System.Drawing.Size(151, 21);
-            this.domainUpDown1.TabIndex = 15;
-            this.domainUpDown1.TabStop = false;
-            this.domainUpDown1.Text = "市场";
-            this.domainUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox4.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox4.Enabled = false;
+            this.textBox4.Location = new System.Drawing.Point(66, 32);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(120, 21);
+            this.textBox4.TabIndex = 30;
+            this.textBox4.TabStop = false;
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.Location = new System.Drawing.Point(3, 32);
+            this.label3.Location = new System.Drawing.Point(192, 32);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 23);
@@ -560,28 +580,24 @@
             this.label3.Text = "级别";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // domainUpDown2
+            // textBox5
             // 
-            this.domainUpDown2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.domainUpDown2.Items.Add("70");
-            this.domainUpDown2.Items.Add("80");
-            this.domainUpDown2.Items.Add("90");
-            this.domainUpDown2.Location = new System.Drawing.Point(42, 32);
-            this.domainUpDown2.Name = "domainUpDown2";
-            this.domainUpDown2.ReadOnly = true;
-            this.domainUpDown2.Size = new System.Drawing.Size(54, 21);
-            this.domainUpDown2.TabIndex = 16;
-            this.domainUpDown2.TabStop = false;
-            this.domainUpDown2.Text = "级别";
-            this.domainUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox5.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox5.Enabled = false;
+            this.textBox5.Location = new System.Drawing.Point(231, 32);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 21);
+            this.textBox5.TabIndex = 31;
+            this.textBox5.TabStop = false;
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label4
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.Location = new System.Drawing.Point(102, 32);
+            this.label4.Location = new System.Drawing.Point(3, 61);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 23);
+            this.label4.Size = new System.Drawing.Size(58, 23);
             this.label4.TabIndex = 26;
             this.label4.Text = "缩略图";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -589,10 +605,10 @@
             // textBox1
             // 
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox1.Location = new System.Drawing.Point(160, 32);
+            this.textBox1.Location = new System.Drawing.Point(67, 61);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(77, 21);
+            this.textBox1.Size = new System.Drawing.Size(119, 21);
             this.textBox1.TabIndex = 11;
             this.textBox1.TabStop = false;
             this.textBox1.Text = "选择缩略图";
@@ -602,7 +618,7 @@
             // label5
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.Location = new System.Drawing.Point(243, 32);
+            this.label5.Location = new System.Drawing.Point(192, 61);
             this.label5.Margin = new System.Windows.Forms.Padding(3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(42, 23);
@@ -613,10 +629,10 @@
             // textBox2
             // 
             this.textBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox2.Location = new System.Drawing.Point(291, 32);
+            this.textBox2.Location = new System.Drawing.Point(240, 61);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(77, 21);
+            this.textBox2.Size = new System.Drawing.Size(91, 21);
             this.textBox2.TabIndex = 12;
             this.textBox2.TabStop = false;
             this.textBox2.Text = "选择简介大图";
@@ -626,10 +642,10 @@
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label6.Location = new System.Drawing.Point(3, 97);
+            this.label6.Location = new System.Drawing.Point(3, 122);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 39);
+            this.label6.Size = new System.Drawing.Size(58, 24);
             this.label6.TabIndex = 28;
             this.label6.Text = "生活照：";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -639,15 +655,25 @@
             this.listBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(62, 61);
+            this.listBox1.Location = new System.Drawing.Point(67, 90);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(306, 112);
+            this.listBox1.Size = new System.Drawing.Size(264, 88);
             this.listBox1.TabIndex = 17;
             this.listBox1.TabStop = false;
             // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.Location = new System.Drawing.Point(3, 188);
+            this.label8.Margin = new System.Windows.Forms.Padding(3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(57, 23);
+            this.label8.TabIndex = 34;
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(3, 179);
+            this.button19.Location = new System.Drawing.Point(66, 184);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(77, 31);
             this.button19.TabIndex = 23;
@@ -657,7 +683,7 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(86, 179);
+            this.button20.Location = new System.Drawing.Point(149, 184);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(68, 31);
             this.button20.TabIndex = 29;
@@ -685,6 +711,7 @@
             this.button21.TabStop = false;
             this.button21.Text = "上传";
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // openFileDialog1
             // 
@@ -755,8 +782,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.DomainUpDown domainUpDown1;
-        private System.Windows.Forms.DomainUpDown domainUpDown2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label1;
@@ -775,6 +800,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label8;
     }
 }
 

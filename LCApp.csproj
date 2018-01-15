@@ -51,6 +51,7 @@
     <Compile Include="Info.Designer.cs">
       <DependentUpon>Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Select.cs" />
     <Compile Include="Warning1.cs">
       <SubType>Form</SubType>
     </Compile>

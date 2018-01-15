@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace LCApp {
     public class Person {
-        public Person() { }
-        private string id;                  //序号——》输出到表格中 隐藏
-        private string name;            //名字——》输出到表格中 隐藏
-        private string level;              //级别——》输出到表格中 隐藏
-        private string srcImg;          //缩略图存放路径——》输出到表格中 隐藏
-        private string srcInfo;         //简介图存放路径——》输出到表格中 隐藏
-        private string srcPhoto;      //生活照存放路径——》输出到表格中 隐藏
-        private string imgName;     //缩略图文件名——》输出到表格中 隐藏
-        private string infoName;    //简介图文件名——》输出到表格中 隐藏
-        //public List<string> FullPhotosName = new List<string>();//生活照文件名数组——》输出到表格中 隐藏
-        private  List<string> fullPhotosName = new List<string>();//生活照文件名数组——》输出到表格中 隐藏
+        private string _id;                  //序号——》输出到表格中 隐藏
+        private string _name;            //名字——》输出到表格中 隐藏
+        private string _level;              //级别——》输出到表格中 隐藏
+        private string _srcImg;          //缩略图存放路径——》输出到表格中 隐藏
+        private string _srcInfo;         //简介图存放路径——》输出到表格中 隐藏
+        private string _srcPhoto;      //生活照存放路径——》输出到表格中 隐藏
+        private string _imgName;     //缩略图文件名——》输出到表格中 隐藏
+        private string _infoName;    //简介图文件名——》输出到表格中 隐藏
+        private string _srcImgPath;  //缩略图文件 绝对路径——》输出到表格中 隐藏
+        private string _srcInfoPath;  //简介图文件 绝对路径——》输出到表格中 隐藏
+        private  List<string> _fullPhotosName = new List<string>();//生活照文件 绝对路径 数组——》输出到表格中 隐藏
 
 
 
@@ -27,7 +23,7 @@ namespace LCApp {
         public void DeleteFullPhotoNames() {
             foreach (var item in FullPhotosName)
             {
-                File.Delete(@srcPhoto + item);
+                File.Delete(_srcPhoto + item);
             }
 
             FullPhotosName.Clear();
@@ -37,8 +33,8 @@ namespace LCApp {
         /// </summary>
         public string ID
         {
-            get { return id; }
-            set { id = value; }
+            get { return _id; }
+            set { _id = value; }
         }
 
         /// <summary>
@@ -46,8 +42,8 @@ namespace LCApp {
         /// </summary>
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get { return _name; }
+            set { _name = value; }
         }
 
         /// <summary>
@@ -55,8 +51,8 @@ namespace LCApp {
         /// </summary>
         public string Level
         {
-            get { return level; }
-            set { level = value; }
+            get { return _level; }
+            set { _level = value; }
         }
 
         /// <summary>
@@ -64,8 +60,8 @@ namespace LCApp {
         /// </summary>
         public string SrcImg
         {
-            get { return srcImg; }
-            set { srcImg = value; }
+            get { return _srcImg; }
+            set { _srcImg = value; }
         }
 
         /// <summary>
@@ -73,8 +69,8 @@ namespace LCApp {
         /// </summary>
         public string SrcInfo
         {
-            get { return srcInfo; }
-            set { srcInfo = value; }
+            get { return _srcInfo; }
+            set { _srcInfo = value; }
         }
 
         /// <summary>
@@ -82,8 +78,8 @@ namespace LCApp {
         /// </summary>
         public string SrcPhoto
         {
-            get { return srcPhoto; }
-            set { srcPhoto = value; }
+            get { return _srcPhoto; }
+            set { _srcPhoto = value; }
         }
 
         /// <summary>
@@ -91,8 +87,8 @@ namespace LCApp {
         /// </summary>
         public string ImgName
         {
-            get { return imgName; }
-            set { imgName = value; }
+            get { return _imgName; }
+            set { _imgName = value; }
         }
 
         /// <summary>
@@ -100,15 +96,34 @@ namespace LCApp {
         /// </summary>
         public string InfoName
         {
-            get { return infoName; }
-            set { infoName = value; }
+            get { return _infoName; }
+            set { _infoName = value; }
+        }
+        /// <summary>
+        /// 缩略图文件 绝对路径
+        /// </summary>
+        public string SrcImgPath
+        {
+            get { return _srcImgPath; }
+            set { _srcImgPath = value; }
         }
 
+        /// <summary>
+        /// 简介图文件 绝对路径
+        /// </summary>
+        public string SrcInfoPath
+        {
+            get { return _srcInfoPath; }
+            set { _srcInfoPath = value; }
+        }
 
+        /// <summary>
+        /// 生活照 数组 文件绝对路径
+        /// </summary>
         public List<string> FullPhotosName
         {
-            get { return fullPhotosName; }
-            set { fullPhotosName = value; }
+            get { return _fullPhotosName; }
+            set { _fullPhotosName = value; }
         }
     }
 }
