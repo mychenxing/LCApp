@@ -33,6 +33,7 @@ namespace LCApp {
             //getFileName(D_List3);//市场四,70
         }
 
+        public bool IsEmpty = false;//判断当前表格是否为空，为空时禁用编辑按钮
         public bool Upload = true;//上传 true，更新false
         public string PersonId;                             //输入的 id
         public string PersonName;                  //输入的 姓名
@@ -168,7 +169,7 @@ namespace LCApp {
             }
 
         }
-
+        
         public List<Person> GetFileName(List<string> list) {
             var listAry = new List<List<string>>();
             for (int i = 0; i < list.Count; i++)
@@ -178,7 +179,7 @@ namespace LCApp {
             }
 
             for (int j = 0; j < list.Count; j++)
-            {
+            {Console.WriteLine(@"读取文件夹之前*****************************************************："+list[j]);
                 DirectoryInfo dir = new DirectoryInfo(list[j]);
                 foreach (var item in dir.GetFiles("*"))
                 {
@@ -273,60 +274,82 @@ namespace LCApp {
         /// </summary>
         /// <param name="p">Person Array</param>
         public void OutPutGridView(List<Person> p) {
-            dataGridView1.DataSource = p;
-            dataGridView1.Columns["ID"].Visible = false;
-            dataGridView1.Columns["Name"].Visible = false;
-            dataGridView1.Columns["Level"].Visible = false;
-            dataGridView1.Columns["SrcImg"].Visible = false;
-            dataGridView1.Columns["SrcInfo"].Visible = false;
-            dataGridView1.Columns["SrcPhoto"].Visible = false;
-            dataGridView1.Columns["ImgName"].Visible = false;
-            dataGridView1.Columns["InfoName"].Visible = false;
-            dataGridView1.Columns["SrcImgPath"].Visible = false;
-            dataGridView1.Columns["SrcInfoPath"].Visible = false;
-            // dataGridView2.Columns["FullPhotosName"].Visible = false;
-            PhotoLists.Clear();
-            //Console.WriteLine("加载前有生活照人数：" + PhotoLists.Count);
-
-            for (int i = 0; i < p.Count; i++)
+            if (p != null)
             {
-                dataGridView1.Rows[i].Cells[0].Value = p[i].ID;
-                dataGridView1.Rows[i].Cells[1].Value = p[i].Name;
-                dataGridView1.Rows[i].Cells[2].Value = p[i].Level;
-                dataGridView1.Rows[i].Cells[3].Value = p[i].SrcImg;
-                dataGridView1.Rows[i].Cells[4].Value = p[i].SrcInfo;
-                dataGridView1.Rows[i].Cells[5].Value = p[i].SrcPhoto;
-                dataGridView1.Rows[i].Cells[6].Value = p[i].SrcImgPath;
-                dataGridView1.Rows[i].Cells[7].Value = p[i].SrcInfoPath;
-                PhotoLists.Add(p[i].FullPhotosName);
-            }
-
-            int n = 0;
-            for (int j = 0; j < PhotoLists.Count; j++)
-            {
-                for (int k = 0; k < PhotoLists[j].Count; k++)
+                IsEmpty = false;//判断当前表格是否为空，为空时禁用编辑按钮
+                dataGridView1.DataSource = p;
+                //dataGridView1.Columns["ID"].Visible = false;
+                //dataGridView1.Columns["Name"].Visible = false;
+                //dataGridView1.Columns["Level"].Visible = false;
+                dataGridView1.Columns["SrcImg"].Visible = false;
+                dataGridView1.Columns["SrcInfo"].Visible = false;
+                dataGridView1.Columns["SrcPhoto"].Visible = false;
+                dataGridView1.Columns["ImgName"].Visible = false;
+                dataGridView1.Columns["InfoName"].Visible = false;
+                dataGridView1.Columns["SrcImgPath"].Visible = false;
+                dataGridView1.Columns["SrcInfoPath"].Visible = false;
+                // dataGridView2.Columns["FullPhotosName"].Visible = false;
+                PhotoLists.Clear();
+                //Console.WriteLine("加载前有生活照人数：" + PhotoLists.Count);
+                Console.WriteLine(p[0].ID);
+                for (int i = 0; i < p.Count; i++)
                 {
-                    Console.WriteLine(@"生活照：" + PhotoLists[j][k]);
+                    dataGridView1.Rows[i].Cells[0].Value = p[i].ID;
+                    dataGridView1.Rows[i].Cells[1].Value = p[i].Name;
+                    dataGridView1.Rows[i].Cells[2].Value = p[i].Level;
+                    dataGridView1.Rows[i].Cells[3].Value = p[i].SrcImg;
+                    dataGridView1.Rows[i].Cells[4].Value = p[i].SrcInfo;
+                    dataGridView1.Rows[i].Cells[5].Value = p[i].SrcPhoto;
+                    dataGridView1.Rows[i].Cells[6].Value = p[i].SrcImgPath;
+                    dataGridView1.Rows[i].Cells[7].Value = p[i].SrcInfoPath;
+
+                    dataGridView1.Columns[3].Visible = false;
+                    dataGridView1.Columns[4].Visible = false;
+                    dataGridView1.Columns[5].Visible = false;
+                    dataGridView1.Columns[6].Visible = false;
+                    dataGridView1.Columns[7].Visible = false;
+                    PhotoLists.Add(p[i].FullPhotosName);
                 }
-                if (PhotoLists[j].Count > 0) n++;
+
+                int n = 0;
+                for (int j = 0; j < PhotoLists.Count; j++)
+                {
+                    for (int k = 0; k < PhotoLists[j].Count; k++)
+                    {
+                        Console.WriteLine(@"生活照：" + PhotoLists[j][k]);
+                    }
+                    if (PhotoLists[j].Count > 0) n++;
+                }
+                Console.WriteLine(@"加载后有生活照人数：" + n);
+
+                PersonSrcPhotoPathList.Clear(); //移除原有元素
+                PersonSrcPhotoPathList = PhotoLists[0]; //添加现有元素
+                PersonId = (string) dataGridView1.Rows[0].Cells[0].Value; //输入的 id
+                PersonName = (string) dataGridView1.Rows[0].Cells[1].Value; //输入的 姓名
+                PersonLevel = (string) dataGridView1.Rows[0].Cells[2].Value; //传入的 级别
+                PersonSrcImg = (string) dataGridView1.Rows[0].Cells[3].Value; //传入的 缩略图存放 路径
+                PersonSrcInfo = (string) dataGridView1.Rows[0].Cells[4].Value; //传入的 简介图存放 路径
+                PersonSrcPhoto = (string) dataGridView1.Rows[0].Cells[5].Value; //传入的 生活照存放 路径
+                PersonSrcImgPath = (string) dataGridView1.Rows[0].Cells[6].Value; //传入的 缩略图文件绝对路径
+                PersonSrcInfoPath = (string) dataGridView1.Rows[0].Cells[7].Value; //传入的 简介图文件绝对路径
+
+                //string str = dataGridView1.Rows[0].Cells[6].Value.ToString();
+
+                //pictureBox1.Image = Image.FromFile(PersonSrcImgPath);
+
+                Image image1 = Image.FromFile(PersonSrcImgPath);
+                pictureBox1.Image = new Bitmap(image1);
+                image1.Dispose();
+
+                Console.WriteLine(@"缩略图路径：" + PersonSrcImgPath);
+                Console.WriteLine(@"简介图路径：" + PersonSrcInfoPath);
             }
-            Console.WriteLine(@"加载后有生活照人数：" + n);
-
-            string str = dataGridView1.Rows[0].Cells[6].Value.ToString();
-            Console.WriteLine(@"缩略图路径：" + str);
-            pictureBox1.Image = Image.FromFile(str);
-
-
-            PersonSrcPhotoPathList.Clear();//移除原有元素
-            PersonSrcPhotoPathList = PhotoLists[0];//添加现有元素
-            PersonId = (string)dataGridView1.Rows[0].Cells[0].Value;//输入的 id
-            PersonName = (string)dataGridView1.Rows[0].Cells[1].Value;//输入的 姓名
-            PersonLevel = (string)dataGridView1.Rows[0].Cells[2].Value;//传入的 级别
-            PersonSrcImg = (string)dataGridView1.Rows[0].Cells[3].Value;//传入的 缩略图存放 路径
-            PersonSrcInfo = (string)dataGridView1.Rows[0].Cells[4].Value;//传入的 简介图存放 路径
-            PersonSrcPhoto = (string)dataGridView1.Rows[0].Cells[5].Value;//传入的 生活照存放 路径
-            PersonSrcImgPath = (string)dataGridView1.Rows[0].Cells[6].Value;//传入的 缩略图文件绝对路径
-            PersonSrcInfoPath = (string)dataGridView1.Rows[0].Cells[7].Value;//传入的 简介图文件绝对路径
+            else
+            {
+                IsEmpty = true;//判断当前表格是否为空，为空时禁用编辑按钮
+                dataGridView1.DataSource = null;
+                pictureBox1.Image = null;
+            }
         }
 
         /// <summary>
@@ -348,6 +371,7 @@ namespace LCApp {
             button5.Text = button8.Text = button11.Text = button14.Text = @"首席业务总监";
             button6.Text = button9.Text = button12.Text = button15.Text = @"高级业务总监";
             button7.Text = button10.Text = button13.Text = button16.Text = @"业务总监";
+            button23.Enabled = false;//刷新按钮禁用
         }
 
         /// <summary>
@@ -358,6 +382,9 @@ namespace LCApp {
             button2.Enabled = true;
             button3.Enabled = true;
             button4.Enabled = true;
+            pictureBox1.Image = null;
+            pictureBox2.Image = null;
+            pictureBox3.Image = null;
         }
 
         /// <summary>
@@ -407,6 +434,7 @@ namespace LCApp {
         /// <param name="_bool"></param>
         void GridView(Boolean _bool) {
             dataGridView1.Visible = _bool;
+            button23.Visible = _bool;//刷新按钮
         }
 
         /// <summary>
@@ -481,16 +509,28 @@ namespace LCApp {
             GridView(true);// 表格 隐藏
             button5.Enabled = false;
 
-            if (_pic11.Count == 0)
-            {
-                _pic11 = GetFileName(AList1);//市场一,90
-            }
-            else if (_pic11.Count > 0)
-            {
-                _pic11.Clear();
-                _pic11 = GetFileName(AList1);//市场一,90
-            }
-            OutPutGridView(_pic11);
+            //市场一,90
+            LoadFun(ref _pic11,ref  AList1);//加载人员资料输出到表格
+
+            //_pic11.Clear();
+            //_pic11 = GetFileName(AList1);//市场一,90
+            //Console.WriteLine(@"_pic11 人数：" + _pic11.Count);
+            //if (_pic11.Count > 0)
+            //{
+            //    OutPutGridView(_pic11);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic11数量：" + _pic11.Count);
+
+            //    PersonSrcImg = AList1[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = AList1[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = AList1[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;// 人员 按钮,显示
@@ -501,9 +541,28 @@ namespace LCApp {
             GridView(true);
             button6.Enabled = false;
 
-            if (_pic12.Count == 0)
-                _pic12 = GetFileName(AList2);//市场一,80
-            OutPutGridView(_pic12);
+            //市场一,80
+            LoadFun(ref _pic12, ref AList2);//加载人员资料输出到表格
+
+            //_pic12.Clear();
+            //_pic12 = GetFileName(AList2);//市场一,80
+            //Console.WriteLine(@"_pic12 人数：" + _pic12.Count);
+            //if (_pic12.Count > 0)
+            //{
+            //    OutPutGridView(_pic12);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic12数量：" + _pic12.Count);
+
+            //    PersonSrcImg = AList2[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = AList2[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = AList2[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -515,9 +574,28 @@ namespace LCApp {
             GridView(true);
             button7.Enabled = false;
 
-            if (_pic13.Count == 0)
-                _pic13 = GetFileName(AList3);//市场一,70
-            OutPutGridView(_pic13);
+            //市场一,70
+            LoadFun(ref _pic13, ref AList3);//加载人员资料输出到表格
+
+            //_pic13.Clear();
+            //_pic13 = GetFileName(AList3);//市场一,70
+            //Console.WriteLine(@"_pic13 人数：" + _pic13.Count);
+            //if (_pic13.Count > 0)
+            //{
+            //    OutPutGridView(_pic13);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic13数量：" + _pic13.Count);
+
+            //    PersonSrcImg = AList3[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = AList3[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = AList3[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -528,9 +606,28 @@ namespace LCApp {
             GridView(true);
             button8.Enabled = false;
 
-            if (_pic21.Count == 0)
-                _pic21 = GetFileName(BList1);//市场二,90
-            OutPutGridView(_pic21);
+            //市场二,90
+            LoadFun(ref _pic21, ref BList1);//加载人员资料输出到表格
+
+            //_pic21.Clear();
+            //_pic21 = GetFileName(BList1);//市场二,90
+            //Console.WriteLine(@"_pic21 人数：" + _pic21.Count);
+            //if (_pic21.Count > 0)
+            //{
+            //    OutPutGridView(_pic21);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic21数量：" + _pic21.Count);
+
+            //    PersonSrcImg = BList1[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = BList1[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = BList1[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -541,9 +638,28 @@ namespace LCApp {
             GridView(true);
             button9.Enabled = false;
 
-            if (_pic22.Count == 0)
-                _pic22 = GetFileName(BList2);//市场二,80
-            OutPutGridView(_pic22);
+            //市场二,80
+            LoadFun(ref _pic22, ref BList2);//加载人员资料输出到表格
+
+            //_pic22.Clear();
+            //_pic22 = GetFileName(BList2);//市场二,80
+            //Console.WriteLine(@"_pic22 人数：" + _pic22.Count);
+            //if (_pic22.Count > 0)
+            //{
+            //    OutPutGridView(_pic22);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic22数量：" + _pic22.Count);
+
+            //    PersonSrcImg = BList2[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = BList2[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = BList2[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -554,9 +670,28 @@ namespace LCApp {
             GridView(true);
             button10.Enabled = false;
 
-            if (_pic23.Count == 0)
-                _pic23 = GetFileName(BList3);//市场二,70
-            OutPutGridView(_pic23);
+            //市场二,70
+            LoadFun(ref _pic23, ref BList3);//加载人员资料输出到表格
+
+            //_pic23.Clear();
+            //_pic23 = GetFileName(BList3);//市场二,70
+            //Console.WriteLine(@"_pic23 人数：" + _pic23.Count);
+            //if (_pic23.Count > 0)
+            //{
+            //    OutPutGridView(_pic23);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic23数量：" + _pic23.Count);
+
+            //    PersonSrcImg = BList3[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = BList3[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = BList3[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -567,9 +702,28 @@ namespace LCApp {
             GridView(true);
             button11.Enabled = false;
 
-            if (_pic31.Count == 0)
-                _pic31 = GetFileName(CList1);//市场三,90
-            OutPutGridView(_pic31);
+            //市场三,90
+            LoadFun(ref _pic31, ref CList1);//加载人员资料输出到表格
+
+            //_pic31.Clear();
+            //_pic31 = GetFileName(CList1);//市场三,90
+            //Console.WriteLine(@"_pic31 人数：" + _pic31.Count);
+            //if (_pic31.Count > 0)
+            //{
+            //    OutPutGridView(_pic31);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic31数量：" + _pic31.Count);
+
+            //    PersonSrcImg = CList1[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = CList1[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = CList1[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -580,9 +734,28 @@ namespace LCApp {
             GridView(true);
             button12.Enabled = false;
 
-            if (_pic32.Count == 0)
-                _pic32 = GetFileName(CList2);//市场三,80
-            OutPutGridView(_pic32);
+            //市场三,80
+            LoadFun(ref _pic32, ref CList2);//加载人员资料输出到表格
+
+            //_pic32.Clear();
+            //_pic32 = GetFileName(CList2);//市场三,80
+            //Console.WriteLine(@"_pic32 人数：" + _pic32.Count);
+            //if (_pic32.Count > 0)
+            //{
+            //    OutPutGridView(_pic32);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic32数量：" + _pic32.Count);
+
+            //    PersonSrcImg = CList2[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = CList2[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = CList2[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -593,9 +766,28 @@ namespace LCApp {
             GridView(true);
             button13.Enabled = false;
 
-            if (_pic33.Count == 0)
-                _pic33 = GetFileName(CList3);//市场三,70
-            OutPutGridView(_pic33);
+            //市场三,70
+            LoadFun(ref _pic33, ref CList3);//加载人员资料输出到表格
+
+            //_pic33.Clear();
+            //_pic33 = GetFileName(CList3);//市场三,70
+            //Console.WriteLine(@"_pic32 人数：" + _pic33.Count);
+            //if (_pic33.Count > 0)
+            //{
+            //    OutPutGridView(_pic33);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic32数量：" + _pic33.Count);
+
+            //    PersonSrcImg = CList3[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = CList3[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = CList3[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -606,9 +798,28 @@ namespace LCApp {
             GridView(true);
             button14.Enabled = false;
 
-            if (_pic41.Count == 0)
-                _pic41 = GetFileName(DList1);//市场四,90
-            OutPutGridView(_pic41);
+            //市场四,90
+            LoadFun(ref _pic41, ref DList1);//加载人员资料输出到表格
+
+            //_pic41.Clear();
+            //_pic41 = GetFileName(DList1);//市场四,90
+            //Console.WriteLine(@"_pic41 人数：" + _pic41.Count);
+            //if (_pic41.Count > 0)
+            //{
+            //    OutPutGridView(_pic41);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic41数量：" + _pic41.Count);
+
+            //    PersonSrcImg = DList1[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = DList1[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = DList1[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -619,9 +830,28 @@ namespace LCApp {
             GridView(true);
             button15.Enabled = false;
 
-            if (_pic42.Count == 0)
-                _pic42 = GetFileName(DList2);//市场四,80
-            OutPutGridView(_pic42);
+            //市场四,80
+            LoadFun(ref _pic42, ref DList2);//加载人员资料输出到表格
+
+            //_pic42.Clear();
+            //_pic42 = GetFileName(DList2);//市场四,80
+            //Console.WriteLine(@"_pic42 人数：" + _pic42.Count);
+            //if (_pic42.Count > 0)
+            //{
+            //    OutPutGridView(_pic42);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic42数量：" + _pic42.Count);
+
+            //    PersonSrcImg = DList2[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = DList2[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = DList2[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -632,9 +862,28 @@ namespace LCApp {
             GridView(true);
             button16.Enabled = false;
 
-            if (_pic43.Count == 0)
-                _pic43 = GetFileName(DList3);//市场四,70
-            OutPutGridView(_pic43);
+            //市场四,70
+            LoadFun(ref _pic43, ref DList3);//加载人员资料输出到表格
+
+            //_pic43.Clear();
+            //_pic43 = GetFileName(DList3);//市场四,70
+            //Console.WriteLine(@"_pic43 人数：" + _pic43.Count);
+            //if (_pic43.Count > 0)
+            //{
+            //    OutPutGridView(_pic43);
+            //}
+            //else
+            //{
+            //    Console.WriteLine(@"_pic43数量：" + _pic43.Count);
+
+            //    PersonSrcImg = DList3[0];                       //传入的 缩略图存放 路径
+            //    PersonSrcInfo = DList3[1];                      //传入的 简介图存放 路径
+            //    PersonSrcPhoto = DList3[2];                //传入的 生活照存放 路径
+            //    Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+            //    Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+            //    Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+            //    OutPutGridView(null);
+            //}
 
             Picture(true);
             button17.Visible = true;
@@ -663,7 +912,10 @@ namespace LCApp {
                 {
                     string file = openFileDialog1.FileName;
                     textBox1.Text = file;
-                    pictureBox2.Image = Image.FromFile(file);
+                    //pictureBox2.Image = Image.FromFile(file);
+                    Image image2 = Image.FromFile(file);
+                    pictureBox2.Image = new Bitmap(image2);
+                    image2.Dispose();
                 }
                 catch
                 {
@@ -692,7 +944,10 @@ namespace LCApp {
                 {
                     string file = openFileDialog2.FileName;
                     textBox2.Text = file;
-                    pictureBox3.Image = Image.FromFile(file);
+                    //pictureBox3.Image = Image.FromFile(file);
+                    Image image3 = Image.FromFile(file);
+                    pictureBox3.Image = new Bitmap(image3);
+                    image3.Dispose();
                 }
                 catch
                 {
@@ -725,34 +980,37 @@ namespace LCApp {
                 textBox4.Text = ""; //市场分类
                 textBox5.Text = ""; //级别
 
-                if (PersonSrcImg.IndexOf("Array_1") != 0)
+                if (PersonSrcImg.IndexOf("Array_1") != -1)
                 {
                     textBox4.Text = CategoryName[(int)Category.Arr1]; //市场分类：一
                 }
-                else if (PersonSrcImg.IndexOf("Array_2") != 0)
+                else if (PersonSrcImg.IndexOf("Array_2") != -1)
                 {
                     textBox4.Text = CategoryName[(int)Category.Arr2]; //市场分类：二
                 }
-                else if (PersonSrcImg.IndexOf("Array_3") != 0)
+                else if (PersonSrcImg.IndexOf("Array_3") != -1)
                 {
                     textBox4.Text = CategoryName[(int)Category.Arr3]; //市场分类：三
                 }
-                else if (PersonSrcImg.IndexOf("Array_4") != 0)
+                else if (PersonSrcImg.IndexOf("Array_4") != -1)
                 {
                     textBox4.Text = CategoryName[(int)Category.Arr4]; //市场分类：四
                 }
 
-                if (PersonSrcImg.IndexOf("IMG_1") != 0)
+                if (PersonSrcImg.IndexOf("IMG_1") != -1)
                 {
                     textBox5.Text = LevelName[(int)Levels.Img90]; //级别：90
+                    PersonLevel = "90";
                 }
-                else if (PersonSrcImg.IndexOf("IMG_2") != 0)
+                else if (PersonSrcImg.IndexOf("IMG_2") != -1)
                 {
                     textBox5.Text = LevelName[(int)Levels.Img80]; //级别：80
+                    PersonLevel = "80";
                 }
-                else if (PersonSrcImg.IndexOf("IMG_3") != 0)
+                else if (PersonSrcImg.IndexOf("IMG_3") != -1)
                 {
                     textBox5.Text = LevelName[(int)Levels.Img70]; //级别：70
+                    PersonLevel = "70";
                 }
 
                 if (PersonSrcImg.IndexOf("IMG_1") == -1)
@@ -772,45 +1030,58 @@ namespace LCApp {
             }
             else if (result == DialogResult.Retry)
             {//编辑
+                if (IsEmpty) return;//判断当前表格是否为空，为空时禁用编辑按钮
                 Upload = false;//更新
                 panel1.Visible = false;
                 button21.Text = @"更新";
-                pictureBox2.Image = Image.FromFile(PersonSrcImgPath);
-                pictureBox3.Image = Image.FromFile(PersonSrcInfoPath);
+                //pictureBox2.Image = Image.FromFile(PersonSrcImgPath);
+                //pictureBox3.Image = Image.FromFile(PersonSrcInfoPath);
+                
+                Image image4 = Image.FromFile(PersonSrcImgPath);
+                Image image5 = Image.FromFile(PersonSrcInfoPath);
+
+                pictureBox2.Image = new Bitmap(image4);
+                pictureBox3.Image = new Bitmap(image5);
+                image4.Dispose();
+                image5.Dispose();
+
                 textBox1.Text = PersonSrcImgPath;
                 textBox2.Text = PersonSrcInfoPath;
                 textBox6.Text = PersonId;//id
                 textBox3.Text = PersonName;//姓名
                 textBox4.Text = ""; //市场分类
                 textBox5.Text = ""; //级别
-                if (PersonSrcImg.IndexOf("Array_1") != 0)
+                if (PersonSrcImg.IndexOf("Array_1") != -1)
                 {
                     textBox4.Text = CategoryName[(int)Category.Arr1]; //市场分类：一
                 }
-                else if (PersonSrcImg.IndexOf("Array_2") != 0)
+                else if (PersonSrcImg.IndexOf("Array_2") != -1)
                 {
                     textBox4.Text = CategoryName[(int)Category.Arr2]; //市场分类：二
                 }
-                else if (PersonSrcImg.IndexOf("Array_3") != 0)
+                else if (PersonSrcImg.IndexOf("Array_3") != -1)
                 {
                     textBox4.Text = CategoryName[(int)Category.Arr3]; //市场分类：三
                 }
-                else if (PersonSrcImg.IndexOf("Array_4") != 0)
+                else if (PersonSrcImg.IndexOf("Array_4") != -1)
                 {
                     textBox4.Text = CategoryName[(int)Category.Arr4]; //市场分类：四
                 }
 
-                if (PersonSrcImg.IndexOf("IMG_1") != 0)
+                if (PersonSrcImg.IndexOf("IMG_1") != -1)
                 {
                     textBox5.Text = LevelName[(int)Levels.Img90]; //级别：90
+                    PersonLevel = "90";
                 }
-                else if (PersonSrcImg.IndexOf("IMG_2") != 0)
+                else if (PersonSrcImg.IndexOf("IMG_2") != -1)
                 {
                     textBox5.Text = LevelName[(int)Levels.Img80]; //级别：80
+                    PersonLevel = "80";
                 }
-                else if (PersonSrcImg.IndexOf("IMG_3") != 0)
+                else if (PersonSrcImg.IndexOf("IMG_3") != -1)
                 {
                     textBox5.Text = LevelName[(int)Levels.Img70]; //级别：70
+                    PersonLevel = "70";
                 }
 
                 if (PersonSrcImg.IndexOf("IMG_1") == -1)
@@ -828,8 +1099,6 @@ namespace LCApp {
                     button20.Visible = true;
                 }
 
-                //PersonSrcPhotoPathList.Clear();//移除原有元素
-                //PersonSrcPhotoPathList = PhotoLists[i];//添加现有元素
                 listBox1.Items.Clear();
                 for (int i = 0; i < PersonSrcPhotoPathList.Count; i++)
                 {
@@ -842,17 +1111,26 @@ namespace LCApp {
                 DialogResult delResult = MessageBox.Show(@"确定删除吗？", @"提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (delResult == DialogResult.Yes)
                 {
-                    pictureBox1.Image = null;
-                    File.Delete(PersonSrcImgPath);//传入的 缩略图文件绝对路径
+                    pictureBox1.Image.Dispose();
+                    //pictureBox2.Image.Dispose();
+                    //pictureBox3.Image.Dispose();
+                    File.Delete(PersonSrcImgPath); //传入的 缩略图文件绝对路径
 
                     File.Delete(PersonSrcInfoPath);//传入的 简介图文件绝对路径
+
                     for (int i = 0; i < PersonSrcPhotoPathList.Count; i++)
                     {
+                        Console.WriteLine(PersonSrcPhotoPathList[i]);
                         File.Delete(PersonSrcPhotoPathList[i]);//传入的 生活照文件数组绝对路径
                     }
                     PersonSrcPhotoPathList.Clear();//清空路径元素
-                    
+
+                    Console.WriteLine(@"已删除"+ PersonSrcImgPath);
                     MessageBox.Show(@"已删除人员");
+
+                    dataGridView1.DataSource = null;
+                    pictureBox1.Image = null;
+                    button23.Enabled = true;//刷新按钮禁用
                 }
                 else
                 {
@@ -874,7 +1152,12 @@ namespace LCApp {
         private void dataGridView1_Click(object sender, EventArgs e) {
 
             int i = int.Parse(dataGridView1.CurrentCellAddress.Y.ToString());
-
+            Console.WriteLine(@"点击的编号是："+i);
+            if (i < 0)
+            {
+                pictureBox1.Image = null;
+                return;
+            }
             string id = dataGridView1.Rows[i].Cells[0].Value.ToString();//人员 ID号
             string name = dataGridView1.Rows[i].Cells[1].Value.ToString();//人员 姓名
             string level = dataGridView1.Rows[i].Cells[2].Value.ToString();//人员 级别
@@ -884,7 +1167,11 @@ namespace LCApp {
             string srcImgPath = dataGridView1.Rows[i].Cells[6].Value.ToString();//缩略图文件路径
             string srcInfoPath = dataGridView1.Rows[i].Cells[7].Value.ToString();//简介图文件路径
 
-            pictureBox1.Image = Image.FromFile(srcImgPath);
+            //pictureBox1.Image = Image.FromFile(srcImgPath);
+            //Image image6 = Image.FromFile(PersonSrcImgPath);
+            Image image6 = Image.FromFile(srcImgPath);
+            pictureBox1.Image = new Bitmap(image6);
+            image6.Dispose();
 
             PersonSrcPhotoPathList.Clear();//移除原有元素
             PersonSrcPhotoPathList = PhotoLists[i];//添加现有元素
@@ -904,14 +1191,14 @@ namespace LCApp {
             }
             Console.WriteLine("");
 
-            PersonId = id;            //输入的 id
-            PersonName = name;                           //输入的 姓名
-            PersonLevel = level;   //传入的 级别
-            PersonSrcImg = srcImg;                       //传入的 缩略图存放 路径
-            PersonSrcInfo = srcInfo;                      //传入的 简介图存放 路径
-            PersonSrcPhoto = srcPhoto;                //传入的 生活照存放 路径
-            PersonSrcImgPath = srcImgPath;         //传入的 缩略图文件绝对路径
-            PersonSrcInfoPath = srcInfoPath;        //传入的 简介图文件绝对路径
+            PersonId = id;                                         //输入的 id
+            PersonName = name;                             //输入的 姓名
+            PersonLevel = level;                                //传入的 级别
+            PersonSrcImg = srcImg;                      //传入的 缩略图存放 路径
+            PersonSrcInfo = srcInfo;                     //传入的 简介图存放 路径
+            PersonSrcPhoto = srcPhoto;               //传入的 生活照存放 路径
+            PersonSrcImgPath = srcImgPath;           //传入的 缩略图文件绝对路径
+            PersonSrcInfoPath = srcInfoPath;          //传入的 简介图文件绝对路径
         }
 
         private void button21_Click(object sender, EventArgs e) {
@@ -931,14 +1218,18 @@ namespace LCApp {
 
                     imgName = textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + (textBox1.Text.LastIndexOf(".jpg") != -1 ? ".jpg" : ".png");
                     infoName = textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + (textBox2.Text.LastIndexOf(".jpg") != -1 ? ".jpg" : ".png");
-                    
+
                     File.Copy(textBox1.Text, PersonSrcImg + imgName);
                     File.Copy(textBox2.Text, PersonSrcInfo + infoName);
 
                     Console.WriteLine(PersonSrcImg + imgName);
                     Console.WriteLine(PersonSrcInfo + infoName);
                     MessageBox.Show(@"上传完成！");
+
+                    dataGridView1.DataSource = null;
+                    pictureBox1.Image = null;
                     panel1.Visible = true;
+                    button23.Enabled = true;//刷新按钮禁用
                 }
             }
             else//更新
@@ -948,22 +1239,120 @@ namespace LCApp {
                 {
                     imgName = textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + (textBox1.Text.LastIndexOf(".jpg") != -1 ? ".jpg" : ".png");
                     infoName = textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + (textBox2.Text.LastIndexOf(".jpg") != -1 ? ".jpg" : ".png");
-                    //dataGridView1.DataSource = null;
-                    //pictureBox1.Image = null;
-                    //pictureBox2.Image = null;
-                    //pictureBox3.Image = null;
+                    
+                    
                     File.Move(PersonSrcImgPath, PersonSrcImg + imgName);
                     File.Move(PersonSrcInfoPath, PersonSrcInfo + infoName);
-
-                    //File.Move(PersonSrcImgPath, @"F:\MyFile\Data\" + imgName);
-                    //File.Move(PersonSrcInfoPath, @"F:\MyFile\Data\" + infoName);
-
+                    
                     Console.WriteLine(PersonSrcImg + imgName);
                     Console.WriteLine(PersonSrcInfo + infoName);
                     MessageBox.Show(@"更新完成！");
+
+                    dataGridView1.DataSource = null;
+                    pictureBox1.Image = null;
                     panel1.Visible = true;
+                    button23.Enabled = true;//刷新按钮禁用
                 }
             }
+        }
+
+        /// <summary>
+        /// 加载到表格输出
+        /// </summary>
+        /// <param name="_pic">暂存读取的文件数据</param>
+        /// <param name="List">存储文件夹地址的泛型数组</param>
+        public void LoadFun(ref List<Person> _pic,ref List<string> List)
+        {
+            _pic.Clear();
+            _pic = GetFileName(List);
+            Console.WriteLine(@"_pic 人数：" + _pic.Count);
+            if (_pic.Count > 0)
+            {
+                OutPutGridView(_pic);
+            }
+            else
+            {
+                Console.WriteLine(@"_pic 数量：" + _pic.Count);
+
+                PersonSrcImg = List[0];                       //传入的 缩略图存放 路径
+                PersonSrcInfo = List[1];                      //传入的 简介图存放 路径
+                PersonSrcPhoto = List[2];                //传入的 生活照存放 路径
+                Console.WriteLine(@"缩略图存放 路径：" + PersonSrcImg);
+                Console.WriteLine(@"简介图存放 路径：" + PersonSrcInfo);
+                Console.WriteLine(@"生活照存放 路径：" + PersonSrcPhoto);
+                OutPutGridView(null);
+            }
+        }
+
+        private void button23_Click(object sender, EventArgs e) {
+            button23.Enabled = false;//刷新按钮禁用
+            if (PersonSrcImg.IndexOf("Array_1") != -1 && PersonSrcImg.IndexOf("IMG_1") != -1)
+            {
+                //市场一,90
+                LoadFun(ref _pic11, ref AList1);//加载人员资料输出到表格
+            }
+            else if (PersonSrcImg.IndexOf("Array_1") != -1 && PersonSrcImg.IndexOf("IMG_2") != -1)
+            {
+                //市场一,80
+                LoadFun(ref _pic12, ref AList2);//加载人员资料输出到表格
+            }
+            else if (PersonSrcImg.IndexOf("Array_1") != -1 && PersonSrcImg.IndexOf("IMG_3") != -1)
+            {
+                //市场一,70
+                LoadFun(ref _pic13, ref AList3);//加载人员资料输出到表格
+            }
+
+            else if (PersonSrcImg.IndexOf("Array_2") != -1 && PersonSrcImg.IndexOf("IMG_1") != -1)
+            {
+                //市场二,90
+                LoadFun(ref _pic21, ref BList1);//加载人员资料输出到表格
+            }
+            else if (PersonSrcImg.IndexOf("Array_2") != -1 && PersonSrcImg.IndexOf("IMG_2") != -1)
+            {
+                //市场二,80
+                LoadFun(ref _pic22, ref BList2);//加载人员资料输出到表格
+            }
+            else if (PersonSrcImg.IndexOf("Array_2") != -1 && PersonSrcImg.IndexOf("IMG_3") != -1)
+            {
+                //市场二,70
+                LoadFun(ref _pic23, ref BList3);//加载人员资料输出到表格
+            }
+
+            else if (PersonSrcImg.IndexOf("Array_3") != -1 && PersonSrcImg.IndexOf("IMG_1") != -1)
+            {
+                //市场三,90
+                LoadFun(ref _pic31, ref CList1);//加载人员资料输出到表格
+            }
+            else if (PersonSrcImg.IndexOf("Array_3") != -1 && PersonSrcImg.IndexOf("IMG_2") != -1)
+            {
+                //市场三,80
+                LoadFun(ref _pic32, ref CList2);//加载人员资料输出到表格
+            }
+            else if (PersonSrcImg.IndexOf("Array_3") != -1 && PersonSrcImg.IndexOf("IMG_3") != -1)
+            {
+                //市场三,70
+                LoadFun(ref _pic33, ref CList3);//加载人员资料输出到表格
+            }
+
+            else if (PersonSrcImg.IndexOf("Array_4") != -1 && PersonSrcImg.IndexOf("IMG_1") != -1)
+            {
+                //市场四,90
+                LoadFun(ref _pic41, ref DList1);//加载人员资料输出到表格
+            }
+            else if (PersonSrcImg.IndexOf("Array_4") != -1 && PersonSrcImg.IndexOf("IMG_2") != -1)
+            {
+                //市场四,80
+                LoadFun(ref _pic42, ref DList2);//加载人员资料输出到表格
+            }
+            else if (PersonSrcImg.IndexOf("Array_4") != -1 && PersonSrcImg.IndexOf("IMG_3") != -1)
+            {
+                //市场四,70
+                LoadFun(ref _pic43, ref DList3);//加载人员资料输出到表格
+            }
+        }
+
+        private void listBox1_MouseClick(object sender, MouseEventArgs e) {
+            Console.WriteLine(listBox1.SelectedIndex);
         }
     }
 }
