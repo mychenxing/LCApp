@@ -653,7 +653,8 @@ namespace LCApp {
         }
 
         private void button18_Click(object sender, EventArgs e) {
-            Environment.Exit(0);
+            Application.Exit();
+            //Environment.Exit(0);
         }
 
         /// <summary>
