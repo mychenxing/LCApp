@@ -13,28 +13,29 @@ namespace LCApp {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+            //string[] IP_Port;
+            //StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"\IP.txt", false);
+            //IP_Port = sr.ReadLine().Split(',');
+            //Console.WriteLine(IP_Port[0]);
+            //Console.WriteLine(IP_Port[1]);
+            //sr.Close();
+            ////设定服务器IP地址
+            //IPAddress ip = IPAddress.Parse(IP_Port[0]);
+            //int port = Convert.ToInt16(IP_Port[1]);
 
-            string[] IP_Port;
-            StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"\IP.txt", false);
-            IP_Port = sr.ReadLine().Split(',');
-            Console.WriteLine(IP_Port[0]);
-            Console.WriteLine(IP_Port[1]);
-            sr.Close();
-            //设定服务器IP地址
-            IPAddress ip = IPAddress.Parse(IP_Port[0]);
-            int port = Convert.ToInt16(IP_Port[1]);
-
-            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            try
-            {
-                clientSocket.Connect(new IPEndPoint(ip, port));
-                clientSocket.Close();
-                Application.Run(new Form1());
-            }
-            catch
-            {
-                Application.Run(new Warning1());
-            }
+            //Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //try
+            //{
+            //    clientSocket.Connect(new IPEndPoint(ip, port));
+            //    clientSocket.Close();
+            //    Application.Run(new Form1());
+            //}
+            //catch
+            //{
+            //    clientSocket.Close();
+            //    Application.Run(new Warning1());
+            //}
 
             //string[] IP_Port;
             //StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"\IP.txt", false);

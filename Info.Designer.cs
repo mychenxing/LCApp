@@ -85,7 +85,7 @@
             this.MinimizeBox = false;
             this.Name = "Info";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.TopMost = true;
             this.ResumeLayout(false);
 

@@ -47,7 +47,7 @@ namespace LCApp {
 
         public List<string> PersonSrcPhotoPathList = new List<string>();//传入的生活照文件的路径
         public List<List<string>> PhotoLists = new List<List<string>>();//暂存点击表格后加载的生活照文件路径数据
-        public List<string> ListPhoto;//暂存上传文件时，添加的 生活照文件 的路径
+        public List<string> ListPhoto = new List<string>();//暂存上传文件时，添加的 生活照文件 的路径
 
         public string[] LevelName = new[] { "首席业务总监", "高级业务总监", "业务总监" };
         public string[] CategoryName = new[] { "刘莉 市场", "来傅莲/杨辉 市场", "彭焰 市场", "韩振铎/王春洁 市场" };
@@ -338,7 +338,7 @@ namespace LCApp {
                 PersonSrcPhoto = (string)dataGridView1.Rows[0].Cells[5].Value; //传入的 生活照存放 路径
                 PersonSrcImgPath = (string)dataGridView1.Rows[0].Cells[6].Value; //传入的 缩略图文件绝对路径
                 PersonSrcInfoPath = (string)dataGridView1.Rows[0].Cells[7].Value; //传入的 简介图文件绝对路径
-                
+
                 Image image1 = Image.FromFile(PersonSrcImgPath);
                 pictureBox1.Image = new Bitmap(image1);
                 image1.Dispose();
@@ -514,7 +514,7 @@ namespace LCApp {
 
             //市场一,90
             LoadFun(ref _pic11, ref AList1);//加载人员资料输出到表格
-           
+
             Picture(true);
             button17.Visible = true;// 人员 按钮,显示
         }
@@ -526,7 +526,7 @@ namespace LCApp {
 
             //市场一,80
             LoadFun(ref _pic12, ref AList2);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
 
@@ -539,7 +539,7 @@ namespace LCApp {
 
             //市场一,70
             LoadFun(ref _pic13, ref AList3);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -551,7 +551,7 @@ namespace LCApp {
 
             //市场二,90
             LoadFun(ref _pic21, ref BList1);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -563,7 +563,7 @@ namespace LCApp {
 
             //市场二,80
             LoadFun(ref _pic22, ref BList2);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -575,7 +575,7 @@ namespace LCApp {
 
             //市场二,70
             LoadFun(ref _pic23, ref BList3);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -587,7 +587,7 @@ namespace LCApp {
 
             //市场三,90
             LoadFun(ref _pic31, ref CList1);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -599,7 +599,7 @@ namespace LCApp {
 
             //市场三,80
             LoadFun(ref _pic32, ref CList2);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -611,7 +611,7 @@ namespace LCApp {
 
             //市场三,70
             LoadFun(ref _pic33, ref CList3);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -623,7 +623,7 @@ namespace LCApp {
 
             //市场四,90
             LoadFun(ref _pic41, ref DList1);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -635,7 +635,7 @@ namespace LCApp {
 
             //市场四,80
             LoadFun(ref _pic42, ref DList2);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -647,7 +647,7 @@ namespace LCApp {
 
             //市场四,70
             LoadFun(ref _pic43, ref DList3);//加载人员资料输出到表格
-            
+
             Picture(true);
             button17.Visible = true;
         }
@@ -661,7 +661,7 @@ namespace LCApp {
         /// 添加人员，选择缩略图
         /// </summary>
         private void textBox1_Click(object sender, EventArgs e) {
-            if (!Upload) return;//不是新增模式不能点击
+            //if (!Upload) return;//不是新增模式不能点击
             openFileDialog1.Multiselect = false;
             openFileDialog1.InitialDirectory = ".";
             openFileDialog1.Title = @"请选择缩略图文件";
@@ -689,7 +689,7 @@ namespace LCApp {
         /// 添加人员，选择简介图
         /// </summary>
         private void textBox2_Click(object sender, EventArgs e) {
-            if (!Upload) return;//不是新增模式不能点击
+            //if (!Upload) return;//不是新增模式不能点击
             openFileDialog2.Multiselect = false;
             openFileDialog2.InitialDirectory = ".";
             openFileDialog2.Title = @"请选择简介图文件";
@@ -736,7 +736,7 @@ namespace LCApp {
                 textBox4.Text = ""; //市场分类
                 textBox5.Text = ""; //级别
                 listBox1.Items.Clear();//生活照表格清空
-                ListPhoto = new List<string>();//暂存上传文件时，添加的 生活照文件 的路径
+                ListPhoto.Clear(); //暂存上传文件时，添加的 生活照文件 的路径
 
                 if (PersonSrcImg.IndexOf("Array_1") != -1)
                 {
@@ -794,6 +794,7 @@ namespace LCApp {
                 Upload = false;//更新
                 panel1.Visible = false;
                 button21.Text = @"更新";
+                ListPhoto.Clear(); //暂存上传文件时，添加的 生活照文件 的路径
 
                 Image image4 = Image.FromFile(PersonSrcImgPath);
                 Image image5 = Image.FromFile(PersonSrcInfoPath);
@@ -848,10 +849,11 @@ namespace LCApp {
                 }
                 else
                 {
-                    label6.Visible = true;
-                    listBox1.Visible = true;
-                    button19.Visible = false;//生活照 添加按钮
-                    button20.Visible = false;//生活照 删除按钮
+                    //label6.Visible = true;
+                    //listBox1.Visible = true;
+                    //button19.Visible = false;//生活照 添加按钮
+                    //button20.Visible = false;//生活照 删除按钮
+                    Add_Exit_Btn(true);//生活照相关元件 隐藏
                 }
 
                 listBox1.Items.Clear();
@@ -859,7 +861,10 @@ namespace LCApp {
                 {
                     listBox1.Items.Add(PersonSrcPhotoPathList[i]);
                 }
-
+                for (int i = 0; i < listBox1.Items.Count; i++)
+                {
+                    ListPhoto.Add(listBox1.Items[i].ToString());
+                }
             }
             else if (result == DialogResult.No)
             {//删除
@@ -918,7 +923,7 @@ namespace LCApp {
             string srcPhoto = dataGridView1.Rows[i].Cells[5].Value.ToString();//生活照存放 路径
             string srcImgPath = dataGridView1.Rows[i].Cells[6].Value.ToString();//缩略图文件路径
             string srcInfoPath = dataGridView1.Rows[i].Cells[7].Value.ToString();//简介图文件路径
-            
+
             Image image6 = Image.FromFile(srcImgPath);
             pictureBox1.Image = new Bitmap(image6);
             image6.Dispose();
@@ -1008,18 +1013,97 @@ namespace LCApp {
                     imgName = textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + (textBox1.Text.LastIndexOf(".jpg") != -1 ? ".jpg" : ".png");
                     infoName = textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + (textBox2.Text.LastIndexOf(".jpg") != -1 ? ".jpg" : ".png");
 
-                    for (int i = 0; i < PersonSrcPhotoPathList.Count; i++)
+                    //for (int i = 0; i < PersonSrcPhotoPathList.Count; i++)
+                    //{
+                    //    photoName.Add(textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + @"," + (i + 1) + (textBox1.Text.LastIndexOf(".jpg") != -1 ? ".jpg" : ".png"));
+                    //}
+
+
+                    //缩略图 编辑
+                    if (PersonSrcImgPath == textBox1.Text)
                     {
-                        photoName.Add(textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + @","  + (i+1) + (textBox1.Text.LastIndexOf(".jpg") != -1 ? ".jpg" : ".png"));
+                        if (PersonSrcImgPath == PersonSrcImg + imgName)
+                        {
+
+                        }
+                        else
+                        {
+                            File.Move(PersonSrcImgPath, PersonSrcImg + imgName);
+                        }
+                    }
+                    else
+                    {
+                        if (PersonSrcImgPath == PersonSrcImg + imgName)
+                        {
+                            File.Copy(textBox1.Text, PersonSrcImgPath, true);
+                        }
+                        else
+                        {
+                            File.Copy(textBox1.Text, PersonSrcImgPath, true);
+                            File.Move(PersonSrcImgPath, PersonSrcImg + imgName);
+                        }
                     }
 
-                    File.Move(PersonSrcImgPath, PersonSrcImg + imgName);
-                    File.Move(PersonSrcInfoPath, PersonSrcInfo + infoName);
-
-                    for (int i= 0; i < PersonSrcPhotoPathList.Count; i++)
+                    //简介图 编辑
+                    if (PersonSrcInfoPath == textBox2.Text)
                     {
-                        File.Move(PersonSrcPhotoPathList[i], PersonSrcPhoto + photoName[i]);//生活照 文件绝对路径(旧)，文件绝对路径(新)
+                        if (PersonSrcInfoPath == PersonSrcInfo + infoName)
+                        {
+
+                        }
+                        else
+                        {
+                            File.Move(PersonSrcInfoPath, PersonSrcInfo + infoName);
+                        }
                     }
+                    else
+                    {
+                        if (PersonSrcInfoPath == PersonSrcInfo + infoName)
+                        {
+                            File.Copy(textBox2.Text, PersonSrcInfoPath, true);
+                        }
+                        else
+                        {
+                            File.Copy(textBox2.Text, PersonSrcInfoPath, true);
+                            File.Move(PersonSrcInfoPath, PersonSrcInfo + infoName);
+                        }
+                    }
+
+                    //************************************************************************
+                    Console.WriteLine(@"************************************************************************");
+                    Console.WriteLine(listBox1.Items.Count);
+                    for (int i = 0; i < listBox1.Items.Count; i++)
+                    {
+                        photoName.Add(textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + @"," + (i + 1) + (listBox1.Items[i].ToString().LastIndexOf(".jpg") != -1 ? ".jpg" : ".png"));
+                        Console.WriteLine(listBox1.Items[i]);
+                        Console.WriteLine(photoName[i]);
+                    }
+
+                    for (int i = 0; i < listBox1.Items.Count; i++)
+                    {
+                        if (i < PersonSrcPhotoPathList.Count)
+                        {
+                            if (PersonSrcPhotoPathList[i] == listBox1.Items[i].ToString())
+                            {
+                                File.Move(listBox1.Items[i].ToString(), PersonSrcPhoto + photoName[i]);//生活照 文件绝对路径(旧)，文件绝对路径(新)
+                                Console.WriteLine(@"==");
+                                Console.WriteLine(@"旧："+ listBox1.Items[i]);
+                                Console.WriteLine(@"新：" + PersonSrcPhoto + photoName[i]);
+                            }
+                        }
+                        else
+                        {
+                            File.Copy(listBox1.Items[i].ToString(), PersonSrcPhoto + photoName[i], true);//生活照 文件绝对路径(旧)，文件绝对路径(新)
+                            Console.WriteLine(@"i >");
+                            Console.WriteLine(@"旧：" + listBox1.Items[i]);
+                            Console.WriteLine(@"新：" + PersonSrcPhoto + photoName[i]);
+                        }
+
+                    }
+
+
+                    Console.WriteLine(@"@@@@@@@" + photoName.Count);
+
 
                     Console.WriteLine(PersonSrcImg + imgName);
                     Console.WriteLine(PersonSrcInfo + infoName);
@@ -1132,7 +1216,7 @@ namespace LCApp {
         }
 
         private void listBox1_MouseClick(object sender, MouseEventArgs e) {
-            
+
             if (Upload) //上传
             {
 
@@ -1140,8 +1224,8 @@ namespace LCApp {
             else
             {
                 Console.WriteLine(listBox1.SelectedIndex);
-                Console.WriteLine(@"表格人员总数量："+ PhotoLists.Count);
-                Console.WriteLine(@"该人生活照数量："+ PersonSrcPhotoPathList.Count);
+                Console.WriteLine(@"表格人员总数量：" + PhotoLists.Count);
+                Console.WriteLine(@"该人生活照数量：" + PersonSrcPhotoPathList.Count);
                 if (Num != -1) //人员所在的序号
                 {
                     for (int j = 0; j < PersonSrcPhotoPathList.Count; j++)
@@ -1150,7 +1234,7 @@ namespace LCApp {
                         Console.WriteLine(listBox1.Items.Count);
                     }
                 }
-                
+
             }
         }
 
@@ -1159,38 +1243,87 @@ namespace LCApp {
         /// </summary>
         private void button19_Click(object sender, EventArgs e) {
             //ListPhoto
-            openFileDialog3.Multiselect = false;
+            openFileDialog3.Multiselect = false; 
             openFileDialog3.InitialDirectory = ".";
+            openFileDialog3.FileName = "生活照图片文件";
             openFileDialog3.Title = @"请选择生活照文件";
             openFileDialog3.Filter = @"生活照文件(*.jpg,*.png)|*.jpg;*.png";
 
-            if (openFileDialog3.ShowDialog() == DialogResult.OK)
+            if (Upload) //上传
             {
-                try
+                if (openFileDialog3.ShowDialog() == DialogResult.OK)
                 {
-                    string file = openFileDialog3.FileName;
-                    ListPhoto.Add(file);
+                    try
+                    {
+                        string file = openFileDialog3.FileName;
+                        ListPhoto.Add(file);
+                    }
+                    catch
+                    {
+                        MessageBox.Show(@"错误");
+                    }
                 }
-                catch
+                listBox1.Items.Clear();
+                for (int i = 0; i < ListPhoto.Count; i++)
                 {
-                    MessageBox.Show(@"错误");
+                    listBox1.Items.Add(ListPhoto[i]);
                 }
             }
-            listBox1.Items.Clear();
-            for (int i = 0; i < ListPhoto.Count; i++)
+            else
             {
-                listBox1.Items.Add(ListPhoto[i]);
+                if (openFileDialog3.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string file = openFileDialog3.FileName;
+                        ListPhoto.Add(file);
+                    }
+                    catch
+                    {
+                        MessageBox.Show(@"错误");
+                    }
+                }
+                listBox1.Items.Clear();
+                for (int i = 0; i < ListPhoto.Count; i++)
+                {
+                    listBox1.Items.Add(ListPhoto[i]);
+                }
             }
         }
         /// <summary>
         /// 生活照 删除按钮
         /// </summary>
         private void button20_Click(object sender, EventArgs e) {
-            ListPhoto.Clear();
-            listBox1.Items.Clear();
-            for (int i = 0; i < ListPhoto.Count; i++)
+            if (Upload) //上传
             {
-                listBox1.Items.Add(ListPhoto[i]);
+                ListPhoto.Clear();
+                listBox1.Items.Clear();
+                for (int i = 0; i < ListPhoto.Count; i++)
+                {
+                    listBox1.Items.Add(ListPhoto[i]);
+                }
+            }
+            else
+            {
+                DialogResult delListPhoto = MessageBox.Show(@"确定删除已有的生活照？", @"提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (delListPhoto == DialogResult.Yes)
+                {
+                    for (int i = 0; i < PersonSrcPhotoPathList.Count; i++)
+                    {
+                        if (PersonSrcPhotoPathList[i] == listBox1.Items[i].ToString())
+                        {
+                            File.Delete(PersonSrcPhotoPathList[i]);
+                        }
+                    }
+                    PersonSrcPhotoPathList.Clear();
+                    ListPhoto.Clear();
+                    listBox1.Items.Clear();
+                    for (int i = 0; i < ListPhoto.Count; i++)
+                    {
+                        listBox1.Items.Add(ListPhoto[i]);
+                    }
+                }
+
             }
         }
     }
