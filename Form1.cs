@@ -1135,9 +1135,9 @@ namespace LCApp {
         /// </summary>
         private void button21_Click(object sender, EventArgs e) {
             //数字
-            Regex regNumber = new Regex(@"^[0-9]*$");
+            Regex regNumber = new Regex(@"^[0-9.]*$");
             //中文、英文 但不包括下划线等符号
-            Regex regXXX = new Regex(@"^[\u4E00-\u9FA5A-Za-z]+$");
+            Regex regXXX = new Regex(@"^[\u4E00-\u9FA5A-Za-z\s+]+$");
             if (textBox6.Text.Trim() == String.Empty)
             {
                 MessageBox.Show(@"序号：不能为空", @"警告!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1448,7 +1448,8 @@ namespace LCApp {
             openFileDialog3.Title = @"请选择 生活照 图片文件  所需图片分辨率：1920px(宽) - 1080px(高)";
             openFileDialog3.Filter = @"生活照文件(*.jpg,*.png)|*.jpg;*.png";
 
-            if (Upload) //上传
+            //if (Upload) //上传
+            if (true) //上传
             {
                 if (openFileDialog3.ShowDialog() == DialogResult.OK)
                 {
@@ -1470,7 +1471,7 @@ namespace LCApp {
                     }
                     catch
                     {
-                        System.Windows.Forms.MessageBox.Show(@"错误");
+                        MessageBox.Show(@"错误");
                     }
                 }
                 listBox1.Items.Clear();
@@ -1490,7 +1491,7 @@ namespace LCApp {
                     }
                     catch
                     {
-                        System.Windows.Forms.MessageBox.Show(@"错误");
+                        MessageBox.Show(@"错误");
                     }
                 }
                 listBox1.Items.Clear();
@@ -1605,6 +1606,6 @@ namespace LCApp {
                 progressBar1.Visible = false;
             }
         }
-        
+
     }
 }
