@@ -7,7 +7,7 @@
     <ProjectGuid>{2748DBC7-9BB6-4A20-88AA-FED99AB3CAFB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>LCApp</RootNamespace>
-    <AssemblyName>LCApp</AssemblyName>
+    <AssemblyName>春天的列车_后台</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -61,9 +61,7 @@
   <PropertyGroup>
     <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
@@ -81,6 +79,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>CSharpKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -149,7 +150,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="CSharpKey.pfx" />
-    <None Include="MyCSharpKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

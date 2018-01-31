@@ -61,7 +61,7 @@
             this.Padding = new System.Windows.Forms.Padding(9, 8, 9, 8);
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Warning！！！";
+            this.Text = "警告！";
             this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
