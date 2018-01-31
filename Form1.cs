@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using System.Threading;
 
 namespace LCApp {
     public partial class Form1 : Form {
@@ -31,6 +32,137 @@ namespace LCApp {
             //getFileName(B_List3);//市场二,70
             //getFileName(C_List3);//市场三,70
             //getFileName(D_List3);//市场四,70
+        }
+
+        private bool BtnClick = false;//传输视频时，按钮失效
+        private Thread thdCopyFileThread;//创建一个线程
+        private string str = "";//用来记录源文件的名字
+        FileStream FormerOpenFileStream;//实例化源文件FileStream类
+        FileStream ToFileOpenFileStream;//实例化目标文件FileStream类
+        private string Sourcefile;//源文件
+        private string Targetfile;//目标文件
+
+        private int progressvalue = 0;
+        private int progressmax = 0;
+
+        #region //复制文件函数
+
+        /// <summary>
+        /// 复制文件
+        /// </summary>
+        /// <param name="FormerFile">源文件路径</param>
+        /// <param name="ToFile">目的文件路径</param>
+        /// <param name="TranSize">传输大小</param>
+        /// <param name="progressBar">ProgressBar控件</param>
+        public void CopyFile(string FormerFile, string ToFile, int TranSize, ProgressBar progressBar) {
+            BtnClick = true;//传输视频时，按钮失效
+            //progressBar.Value = 0;//设置进度条的当前位置为0
+            //progressBar.Minimum = 0;//设置进度条的最小值为0
+            //progressBar.Visible = true;
+            progressvalue = 0;
+            progressmax = 0;
+            try
+            {
+                FormerOpenFileStream = new FileStream(FormerFile, FileMode.Open, FileAccess.Read);//以只读方式打开源文件
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex);
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            try
+            {
+                FileStream fileToCreate = new FileStream(ToFile, FileMode.Create);//创建目的文件，如果已存在将被覆盖
+                fileToCreate.Close();//关闭所有fileToCreate的资源
+                fileToCreate.Dispose();//释放所有fileToCreate的资源
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex);
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            ToFileOpenFileStream = new FileStream(ToFile, FileMode.Append, FileAccess.Write);//以写方式打开目的文件
+
+            int max = Convert.ToInt32(Math.Ceiling((double)FormerOpenFileStream.Length / (double)TranSize));//根据一次传输的大小，计算最大传输个数. Math.Ceiling 方法 (Double),返回大于或等于指定的双精度浮点数的最小整数值
+
+            //progressBar.Maximum = max;//设置进度条的最大值
+            progressvalue = 0;
+            progressmax = max;
+
+            int FileSize;//每次要拷贝的文件的大小
+
+            if (TranSize < FormerOpenFileStream.Length)//如果分段拷贝，即每次拷贝内容小于文件总长度
+            {
+                byte[] buffer = new byte[TranSize];//根据传输的大小，定义一个字节数组，用来存储传输的字节
+                int copied = 0;//记录传输的大小
+                int tem_n = 1;//设置进度栏中进度的增加个数
+
+                while (copied <= ((int)FormerOpenFileStream.Length - TranSize))
+                {
+                    FileSize = FormerOpenFileStream.Read(buffer, 0, TranSize); //从0开始读到buffer字节数组中，每次最大读TranSize
+                    ToFileOpenFileStream.Write(buffer, 0, TranSize); //向目的文件写入字节
+                    ToFileOpenFileStream.Flush(); //清空缓存,写入到文件中
+                    ToFileOpenFileStream.Position = FormerOpenFileStream.Position; //是源文件的目的文件流的位置相同
+                    copied += FileSize; //记录已经拷贝的大小
+                    //progressBar.Value = progressBar.Value + tem_n; //增加进度栏的进度块
+                    progressvalue = progressvalue + tem_n;
+                }
+
+                int leftSize = (int)FormerOpenFileStream.Length - copied;//获取剩余文件的大小
+                FileSize = FormerOpenFileStream.Read(buffer, 0, leftSize);//读取剩余的字节
+                FormerOpenFileStream.Flush();//清空缓存,写入到文件中
+                ToFileOpenFileStream.Write(buffer, 0, leftSize);//写入剩余的部分
+                ToFileOpenFileStream.Flush();//清空缓存,写入到文件中
+            }
+            else//如果整体拷贝，即每次拷贝内容大于文件总长度
+            {
+                byte[] buffer = new byte[FormerOpenFileStream.Length];
+                FormerOpenFileStream.Read(buffer, 0, (int)FormerOpenFileStream.Length);
+                FormerOpenFileStream.Flush();
+                ToFileOpenFileStream.Write(buffer, 0, (int)FormerOpenFileStream.Length);
+                ToFileOpenFileStream.Flush();
+            }
+
+            FormerOpenFileStream.Close();
+            ToFileOpenFileStream.Close();
+
+            //progressBar.Value = 0;
+            progressvalue = 0;
+            progressmax = 0;
+            str = "";
+            BtnClick = false;//传输视频时，按钮失效
+        }
+        #endregion
+
+        public delegate void CopyFile_Delegate();//定义委托/托管线程
+        /// <summary>
+        /// 在线程上执行委托（设置托管线程函数）
+        /// </summary>
+        public void SetCopyFile() {
+            //this.Invoke(new CopyFile_Delegate(RunCopyFile));//对指定的线程进行托管
+            //下面两行代码等同上面一行代码
+            CopyFile_Delegate copyFile_Delegate = new CopyFile_Delegate(RunCopyFile);//创建delegate对象
+            this.Invoke(copyFile_Delegate); //调用delegate
+
+        }
+
+        public void Run() {
+            thdCopyFileThread = new Thread(start: new ThreadStart(RunCopyFile));
+            thdCopyFileThread.Start();
+        }
+
+        /// <summary>
+        /// 设置线程，运行copy文件，它与代理CopyFile_Delegate应具有相同的参数和返回类型
+        /// </summary>
+        public void RunCopyFile() {
+            CopyFile(Sourcefile, Targetfile, 102400, progressBar1);//复制文件
+            Thread.Sleep(0);//避免假死 
+            thdCopyFileThread.Abort();//关闭线程
+            progressBar1.Visible = false;
         }
 
         public int Num;//点击人员表格时，所在的序号
@@ -438,6 +570,7 @@ namespace LCApp {
         void GridView(Boolean _bool) {
             dataGridView1.Visible = _bool;
             button23.Visible = _bool;//刷新按钮
+            button24.Visible = !_bool;//视频设置按钮
         }
 
         /// <summary>
@@ -461,6 +594,7 @@ namespace LCApp {
 
         //市场一
         private void button1_Click(object sender, EventArgs e) {
+            if(BtnClick) return; //传输视频时，按钮失效
             BtnAry();           //四大市场子按钮组——隐藏
             BtnArySc();         //四大市场按钮——启用
             ChildBtnAry();      // 四大市场子按钮组——启用选项
@@ -473,6 +607,7 @@ namespace LCApp {
 
         //市场二
         private void button2_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             BtnAry();
             BtnArySc();
             ChildBtnAry();
@@ -485,6 +620,7 @@ namespace LCApp {
 
         //市场三
         private void button3_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             BtnAry();
             BtnArySc();
             ChildBtnAry();
@@ -497,6 +633,7 @@ namespace LCApp {
 
         //市场四
         private void button4_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             BtnAry();
             BtnArySc();
             ChildBtnAry();
@@ -508,8 +645,9 @@ namespace LCApp {
         }
 
         private void button5_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();  // 四大市场子按钮组——启用选项
-            GridView(true);// 表格 隐藏
+            GridView(true);// 表格 显示
             button5.Enabled = false;
 
             //市场一,90
@@ -520,6 +658,7 @@ namespace LCApp {
         }
 
         private void button6_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button6.Enabled = false;
@@ -533,6 +672,7 @@ namespace LCApp {
         }
 
         private void button7_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button7.Enabled = false;
@@ -545,6 +685,7 @@ namespace LCApp {
         }
 
         private void button8_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button8.Enabled = false;
@@ -557,6 +698,7 @@ namespace LCApp {
         }
 
         private void button9_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button9.Enabled = false;
@@ -569,6 +711,7 @@ namespace LCApp {
         }
 
         private void button10_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button10.Enabled = false;
@@ -581,6 +724,7 @@ namespace LCApp {
         }
 
         private void button11_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button11.Enabled = false;
@@ -593,6 +737,7 @@ namespace LCApp {
         }
 
         private void button12_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button12.Enabled = false;
@@ -605,6 +750,7 @@ namespace LCApp {
         }
 
         private void button13_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button13.Enabled = false;
@@ -617,6 +763,7 @@ namespace LCApp {
         }
 
         private void button14_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button14.Enabled = false;
@@ -629,6 +776,7 @@ namespace LCApp {
         }
 
         private void button15_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button15.Enabled = false;
@@ -641,6 +789,7 @@ namespace LCApp {
         }
 
         private void button16_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             ChildBtnAry();
             GridView(true);
             button16.Enabled = false;
@@ -653,8 +802,8 @@ namespace LCApp {
         }
 
         private void button18_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             Application.Exit();
-            //Environment.Exit(0);
         }
 
         /// <summary>
@@ -664,7 +813,8 @@ namespace LCApp {
             //if (!Upload) return;//不是新增模式不能点击
             openFileDialog1.Multiselect = false;
             openFileDialog1.InitialDirectory = ".";
-            openFileDialog1.Title = @"请选择缩略图文件";
+            openFileDialog1.FileName = "缩略图文件";
+            openFileDialog1.Title = @"请选择 缩略图 图片文件";
             openFileDialog1.Filter = @"缩略图文件(*.jpg,*.png)|*.jpg;*.png";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -676,6 +826,17 @@ namespace LCApp {
                     Image image2 = Image.FromFile(file);
                     pictureBox2.Image = new Bitmap(image2);
                     image2.Dispose();
+                    //if (image2.Height == 100 && image2.Width == 100)
+                    //{
+                    //    pictureBox2.Image = new Bitmap(image2);
+                    //    image2.Dispose();
+                    //}
+                    //else
+                    //{
+                    //    image2.Dispose();
+                    //    textBox1.Text = @"选择缩略图";
+                    //    MessageBox.Show(@"图片分辨率不匹配");
+                    //}
                 }
                 catch
                 {
@@ -692,7 +853,8 @@ namespace LCApp {
             //if (!Upload) return;//不是新增模式不能点击
             openFileDialog2.Multiselect = false;
             openFileDialog2.InitialDirectory = ".";
-            openFileDialog2.Title = @"请选择简介图文件";
+            openFileDialog2.FileName = "简介图文件";
+            openFileDialog2.Title = @"请选择 简介 图片文件";
             openFileDialog2.Filter = @"简介图文件(*.jpg,*.png)|*.jpg;*.png";
 
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
@@ -715,7 +877,7 @@ namespace LCApp {
 
         //主界面，添加人员按钮
         private void button17_Click(object sender, EventArgs e) {
-
+            if (BtnClick) return; //传输视频时，按钮失效
             Info formInfo = new Info();
             DialogResult result = formInfo.ShowDialog();
             if (result == DialogResult.Cancel)
@@ -1087,7 +1249,7 @@ namespace LCApp {
                             {
                                 File.Move(listBox1.Items[i].ToString(), PersonSrcPhoto + photoName[i]);//生活照 文件绝对路径(旧)，文件绝对路径(新)
                                 Console.WriteLine(@"==");
-                                Console.WriteLine(@"旧："+ listBox1.Items[i]);
+                                Console.WriteLine(@"旧：" + listBox1.Items[i]);
                                 Console.WriteLine(@"新：" + PersonSrcPhoto + photoName[i]);
                             }
                         }
@@ -1149,6 +1311,7 @@ namespace LCApp {
         }
 
         private void button23_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
             button23.Enabled = false;//刷新按钮禁用
             if (PersonSrcImg.IndexOf("Array_1") != -1 && PersonSrcImg.IndexOf("IMG_1") != -1)
             {
@@ -1243,10 +1406,10 @@ namespace LCApp {
         /// </summary>
         private void button19_Click(object sender, EventArgs e) {
             //ListPhoto
-            openFileDialog3.Multiselect = false; 
+            openFileDialog3.Multiselect = false;
             openFileDialog3.InitialDirectory = ".";
             openFileDialog3.FileName = "生活照图片文件";
-            openFileDialog3.Title = @"请选择生活照文件";
+            openFileDialog3.Title = @"请选择 生活照 图片文件";
             openFileDialog3.Filter = @"生活照文件(*.jpg,*.png)|*.jpg;*.png";
 
             if (Upload) //上传
@@ -1326,5 +1489,75 @@ namespace LCApp {
 
             }
         }
+
+        private void button24_Click(object sender, EventArgs e) {
+            if (BtnClick) return; //传输视频时，按钮失效
+            for (int i = 0; i < PList.Count; i++)
+            {
+                Console.WriteLine(PList[i]);
+            }
+
+            Video videoSet = new Video();
+            DialogResult videoResult = videoSet.ShowDialog();
+
+            openFileDialog4.Multiselect = false;
+            openFileDialog4.InitialDirectory = ".";
+            openFileDialog4.Filter = @"视频文件(*.mp4)|*.mp4";
+
+            if (videoResult == DialogResult.OK)
+            {
+                openFileDialog4.FileName = "视频文件";
+                openFileDialog4.Title = @"请选择 左屏待机 视频文件";
+
+                if (openFileDialog4.ShowDialog() == DialogResult.OK)
+                {
+                    string tmp = openFileDialog4.FileName;
+                    Console.WriteLine(tmp);
+                    //File.Copy(tmp, PList[0],true);
+                    Sourcefile = "";//源文件
+                    Targetfile = "";//目标文件
+                    Sourcefile = tmp;
+                    Targetfile = PList[0];
+                    Run();
+                    MessageBox.Show(@"正在传输……");
+                }
+            }
+            else if (videoResult == DialogResult.Yes)
+            {
+                openFileDialog4.FileName = "视频文件";
+                openFileDialog4.Title = @"请选择 右屏待机 视频文件";
+
+                if (openFileDialog4.ShowDialog() == DialogResult.OK)
+                {
+                    string tmp = openFileDialog4.FileName;
+                    Console.WriteLine(tmp);
+                    //File.Copy(tmp,PList[1], true);
+                    Sourcefile = "";//源文件
+                    Targetfile = "";//目标文件
+                    Sourcefile = tmp;
+                    Targetfile = PList[1];
+                    Run();
+                    MessageBox.Show(@"正在传输……");
+                }
+            }
+            else if (videoResult == DialogResult.Cancel)
+            {
+
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e) {
+            if (progressmax != 0)
+            {
+                progressBar1.Maximum = progressmax;
+                progressBar1.Value = progressvalue;
+                progressBar1.Visible = true;
+            }
+            else
+            {
+                progressBar1.Visible = false;
+            }
+        }
+        
     }
 }

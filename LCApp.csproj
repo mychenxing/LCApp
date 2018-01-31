@@ -37,6 +37,9 @@
   <PropertyGroup>
     <StartupObject>LCApp.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiCopyFile.cs" />
+    <Compile Include="CopyProgressBar.cs" />
     <Compile Include="Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +63,18 @@
       <DependentUpon>Info.cs</DependentUpon>
     </Compile>
     <Compile Include="Select.cs" />
+    <Compile Include="Send.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Send.Designer.cs">
+      <DependentUpon>Send.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Video.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Video.Designer.cs">
+      <DependentUpon>Video.cs</DependentUpon>
+    </Compile>
     <Compile Include="Warning1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +92,12 @@
     <Compile Include="Person.cs" />
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Send.resx">
+      <DependentUpon>Send.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Video.resx">
+      <DependentUpon>Video.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Warning1.resx">
       <DependentUpon>Warning1.cs</DependentUpon>
@@ -104,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
