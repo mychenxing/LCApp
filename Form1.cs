@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace LCApp {
@@ -68,7 +69,7 @@ namespace LCApp {
             catch (IOException ex)
             {
                 Console.WriteLine(ex);
-                MessageBox.Show(ex.Message);
+                System.Windows.Forms.MessageBox.Show(ex.Message);
                 return;
             }
 
@@ -81,7 +82,7 @@ namespace LCApp {
             catch (IOException ex)
             {
                 Console.WriteLine(ex);
-                MessageBox.Show(ex.Message);
+                System.Windows.Forms.MessageBox.Show(ex.Message);
                 return;
             }
 
@@ -814,7 +815,7 @@ namespace LCApp {
             openFileDialog1.Multiselect = false;
             openFileDialog1.InitialDirectory = ".";
             openFileDialog1.FileName = "缩略图文件";
-            openFileDialog1.Title = @"请选择 缩略图 图片文件";
+            openFileDialog1.Title = @"请选择 缩略图 图片文件  所需图片分辨率：210px(宽) - 250px(高)";
             openFileDialog1.Filter = @"缩略图文件(*.jpg,*.png)|*.jpg;*.png";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -824,24 +825,24 @@ namespace LCApp {
                     string file = openFileDialog1.FileName;
                     textBox1.Text = file;
                     Image image2 = Image.FromFile(file);
-                    pictureBox2.Image = new Bitmap(image2);
-                    image2.Dispose();
-                    //if (image2.Height == 100 && image2.Width == 100)
-                    //{
-                    //    pictureBox2.Image = new Bitmap(image2);
-                    //    image2.Dispose();
-                    //}
-                    //else
-                    //{
-                    //    image2.Dispose();
-                    //    textBox1.Text = @"选择缩略图";
-                    //    MessageBox.Show(@"图片分辨率不匹配");
-                    //}
+                    //pictureBox2.Image = new Bitmap(image2);
+                    //image2.Dispose();
+                    if (image2.Width == 210 && image2.Height == 250)
+                    {
+                        pictureBox2.Image = new Bitmap(image2);
+                        image2.Dispose();
+                    }
+                    else
+                    {
+                        textBox1.Text = @"选择缩略图";
+                        MessageBox.Show(@"所需图片分辨率：210px * 250px ；图片尺寸不匹配，请重新选择", @"缩略图文件", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        image2.Dispose();
+                    }
                 }
                 catch
                 {
                     textBox1.Text = @"选择缩略图";
-                    MessageBox.Show(@"错误");
+                    MessageBox.Show(@"错误","",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
             }
         }
@@ -854,7 +855,7 @@ namespace LCApp {
             openFileDialog2.Multiselect = false;
             openFileDialog2.InitialDirectory = ".";
             openFileDialog2.FileName = "简介图文件";
-            openFileDialog2.Title = @"请选择 简介 图片文件";
+            openFileDialog2.Title = @"请选择 简介 图片文件  所需图片分辨率：1920px(宽) - 1080px(高)";
             openFileDialog2.Filter = @"简介图文件(*.jpg,*.png)|*.jpg;*.png";
 
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
@@ -864,13 +865,24 @@ namespace LCApp {
                     string file = openFileDialog2.FileName;
                     textBox2.Text = file;
                     Image image3 = Image.FromFile(file);
-                    pictureBox3.Image = new Bitmap(image3);
-                    image3.Dispose();
+                    //pictureBox3.Image = new Bitmap(image3);
+                    //image3.Dispose();
+                    if (image3.Width == 1920 && image3.Height == 1080)
+                    {
+                        pictureBox3.Image = new Bitmap(image3);
+                        image3.Dispose();
+                    }
+                    else
+                    {
+                        textBox2.Text = @"选择简介大图";
+                        MessageBox.Show(@"所需图片分辨率：1920px * 1080px ；图片尺寸不匹配，请重新选择", @"简介图文件", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        image3.Dispose();
+                    }
                 }
                 catch
                 {
                     textBox2.Text = @"选择简介大图";
-                    MessageBox.Show(@"错误");
+                    MessageBox.Show(@"错误", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -1030,7 +1042,7 @@ namespace LCApp {
             }
             else if (result == DialogResult.No)
             {//删除
-                DialogResult delResult = MessageBox.Show(@"确定删除吗？", @"提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult delResult = System.Windows.Forms.MessageBox.Show(@"确定删除吗？", @"提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (delResult == DialogResult.Yes)
                 {
                     pictureBox1.Image.Dispose();
@@ -1046,7 +1058,7 @@ namespace LCApp {
                     PersonSrcPhotoPathList.Clear();//清空路径元素
 
                     Console.WriteLine(@"已删除" + PersonSrcImgPath);
-                    MessageBox.Show(@"已删除人员");
+                    System.Windows.Forms.MessageBox.Show(@"已删除人员");
 
                     dataGridView1.DataSource = null;
                     pictureBox1.Image = null;
@@ -1054,7 +1066,7 @@ namespace LCApp {
                 }
                 else
                 {
-                    MessageBox.Show(@"删除已取消");
+                    System.Windows.Forms.MessageBox.Show(@"删除已取消");
                 }
             }
         }
@@ -1122,13 +1134,37 @@ namespace LCApp {
         /// 上传/更新 按钮
         /// </summary>
         private void button21_Click(object sender, EventArgs e) {
+            //数字
+            Regex regNumber = new Regex(@"^[0-9]*$");
+            //中文、英文 但不包括下划线等符号
+            Regex regXXX = new Regex(@"^[\u4E00-\u9FA5A-Za-z]+$");
+            if (textBox6.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show(@"序号：不能为空", @"警告!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (textBox3.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show(@"姓名：不能为空", @"警告!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (regNumber.IsMatch(textBox6.Text.Trim())==false)
+            {
+                MessageBox.Show(@"序号：非数字", @"警告!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (regXXX.IsMatch(textBox3.Text.Trim()) == false)
+            {
+                MessageBox.Show(@"姓名：非 中文或英文", @"警告!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string imgName;//缩略图 新名字
             string infoName;//简介图 新名字
             List<string> photoName = new List<string>();//生活照 新名字
             DialogResult UpResult;
             if (Upload)//上传
             {
-                UpResult = MessageBox.Show(@"确定上传", @"提示：", MessageBoxButtons.YesNo);
+                UpResult = System.Windows.Forms.MessageBox.Show(@"确定上传", @"提示：", MessageBoxButtons.YesNo);
                 if (UpResult == DialogResult.Yes)
                 {
                     //textBox6.Text//id
@@ -1159,7 +1195,7 @@ namespace LCApp {
                     {
                         Console.WriteLine(PersonSrcPhoto + photoName[i]);
                     }
-                    MessageBox.Show(@"上传完成！");
+                    System.Windows.Forms.MessageBox.Show(@"上传完成！");
 
                     dataGridView1.DataSource = null;
                     pictureBox1.Image = null;
@@ -1169,7 +1205,7 @@ namespace LCApp {
             }
             else//更新
             {
-                UpResult = MessageBox.Show(@"确定更新", @"提示：", MessageBoxButtons.YesNo);
+                UpResult = System.Windows.Forms.MessageBox.Show(@"确定更新", @"提示：", MessageBoxButtons.YesNo);
                 if (UpResult == DialogResult.Yes)
                 {
                     imgName = textBox6.Text + @"_" + textBox3.Text + @"," + PersonLevel + (textBox1.Text.LastIndexOf(".jpg") != -1 ? ".jpg" : ".png");
@@ -1273,7 +1309,7 @@ namespace LCApp {
                     {
                         Console.WriteLine(PersonSrcPhoto + photoName[i]);
                     }
-                    MessageBox.Show(@"更新完成！");
+                    System.Windows.Forms.MessageBox.Show(@"更新完成！");
 
                     dataGridView1.DataSource = null;
                     pictureBox1.Image = null;
@@ -1409,7 +1445,7 @@ namespace LCApp {
             openFileDialog3.Multiselect = false;
             openFileDialog3.InitialDirectory = ".";
             openFileDialog3.FileName = "生活照图片文件";
-            openFileDialog3.Title = @"请选择 生活照 图片文件";
+            openFileDialog3.Title = @"请选择 生活照 图片文件  所需图片分辨率：1920px(宽) - 1080px(高)";
             openFileDialog3.Filter = @"生活照文件(*.jpg,*.png)|*.jpg;*.png";
 
             if (Upload) //上传
@@ -1419,11 +1455,22 @@ namespace LCApp {
                     try
                     {
                         string file = openFileDialog3.FileName;
-                        ListPhoto.Add(file);
+                        Image image7 = Image.FromFile(file);
+                        
+                        if (image7.Width == 1920 && image7.Height == 1080)
+                        {
+                            ListPhoto.Add(file);
+                            image7.Dispose();
+                        }
+                        else
+                        {
+                            MessageBox.Show(@"所需图片分辨率：1920px * 1080px ；图片尺寸不匹配，请重新选择", @"生活照图片文件", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            image7.Dispose();
+                        }
                     }
                     catch
                     {
-                        MessageBox.Show(@"错误");
+                        System.Windows.Forms.MessageBox.Show(@"错误");
                     }
                 }
                 listBox1.Items.Clear();
@@ -1443,7 +1490,7 @@ namespace LCApp {
                     }
                     catch
                     {
-                        MessageBox.Show(@"错误");
+                        System.Windows.Forms.MessageBox.Show(@"错误");
                     }
                 }
                 listBox1.Items.Clear();
@@ -1468,7 +1515,7 @@ namespace LCApp {
             }
             else
             {
-                DialogResult delListPhoto = MessageBox.Show(@"确定删除已有的生活照？", @"提示：", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult delListPhoto = MessageBox.Show(@"确定删除已有的生活照？", @"警告！", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (delListPhoto == DialogResult.Yes)
                 {
                     for (int i = 0; i < PersonSrcPhotoPathList.Count; i++)
@@ -1519,7 +1566,7 @@ namespace LCApp {
                     Sourcefile = tmp;
                     Targetfile = PList[0];
                     Run();
-                    MessageBox.Show(@"正在传输……");
+                    System.Windows.Forms.MessageBox.Show(@"正在传输……");
                 }
             }
             else if (videoResult == DialogResult.Yes)
@@ -1537,7 +1584,7 @@ namespace LCApp {
                     Sourcefile = tmp;
                     Targetfile = PList[1];
                     Run();
-                    MessageBox.Show(@"正在传输……");
+                    System.Windows.Forms.MessageBox.Show(@"正在传输……");
                 }
             }
             else if (videoResult == DialogResult.Cancel)

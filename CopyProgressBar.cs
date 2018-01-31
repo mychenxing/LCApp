@@ -36,7 +36,7 @@ namespace LCApp {
             catch (IOException ex)
             {
                 Console.WriteLine(ex);
-                MessageBox.Show(ex.Message);
+                System.Windows.Forms.MessageBox.Show(ex.Message);
                 return;
             }
 
@@ -49,7 +49,7 @@ namespace LCApp {
             catch (IOException ex)
             {
                 Console.WriteLine(ex);
-                MessageBox.Show(ex.Message);
+                System.Windows.Forms.MessageBox.Show(ex.Message);
                 return;
             }
 

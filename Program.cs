@@ -3,6 +3,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Timers;
+using System.Xml.Xsl;
 
 namespace LCApp {
     static class Program {
@@ -13,29 +15,42 @@ namespace LCApp {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-            //string[] IP_Port;
-            //StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"\IP.txt", false);
-            //IP_Port = sr.ReadLine().Split(',');
-            //Console.WriteLine(IP_Port[0]);
-            //Console.WriteLine(IP_Port[1]);
-            //sr.Close();
-            ////设定服务器IP地址
-            //IPAddress ip = IPAddress.Parse(IP_Port[0]);
-            //int port = Convert.ToInt16(IP_Port[1]);
+            //Application.Run(new Form1());
+            string[] IP_Port;
+            StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"\IP.txt", false);
+            IP_Port = sr.ReadLine().Split(',');
+            Console.WriteLine(IP_Port[0]);
+            Console.WriteLine(IP_Port[1]);
+            sr.Close();
+            //设定服务器IP地址
+            IPAddress ip = IPAddress.Parse(IP_Port[0]);
+            int port = Convert.ToInt16(IP_Port[1]);
 
-            //Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            //try
-            //{
-            //    clientSocket.Connect(new IPEndPoint(ip, port));
-            //    clientSocket.Close();
-            //    Application.Run(new Form1());
-            //}
-            //catch
-            //{
-            //    clientSocket.Close();
-            //    Application.Run(new Warning1());
-            //}
+            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            System.Timers.Timer timer_socket = new System.Timers.Timer();
+            timer_socket.Interval = 1000;
+            int timer_socket_num = 0;
+            timer_socket.Enabled = true;
+            timer_socket.Elapsed += delegate
+            {
+                Console.WriteLine("111111");
+                clientSocket.Close();
+                timer_socket.Stop();
+                timer_socket.Enabled = false;
+                timer_socket.Close();
+            };
+
+            try
+            {
+                clientSocket.Connect(new IPEndPoint(ip, port));
+                clientSocket.Close();
+                Application.Run(new Form1());
+            }
+            catch
+            {
+                clientSocket.Close();
+                Application.Run(new Warning1());
+            }
 
             //string[] IP_Port;
             //StreamReader sr = new StreamReader(AppDomain.CurrentDomain.BaseDirectory + @"\IP.txt", false);
@@ -64,6 +79,7 @@ namespace LCApp {
             //}
 
         }
+
 
         //private static void TestMethod(object obj) {
         //    Socket datastr = obj as Socket;
